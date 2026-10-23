@@ -1,0 +1,4141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; media-src 'self' blob:; upgrade-insecure-requests;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+    <title>فوكس - برنامج الدراسة والتركيز</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" crossorigin="anonymous" onerror="this.onerror=null;this.rel='stylesheet';" media="print" onload="this.media='all'">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #0f172a;
+            --surface: rgba(30, 41, 59, 0.4);
+            --surface-light: rgba(51, 65, 85, 0.6);
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --primary-glow: rgba(99, 102, 241, 0.8);
+            --primary-glow-soft: rgba(99, 102, 241, 0.5);
+
+            /* New Tasks Design Tokens */
+            --bg-elevated: rgba(30, 41, 59, 0.6);
+            --bg-high: rgba(51, 65, 85, 0.8);
+            --ink: var(--text);
+            --ink-soft: var(--text-muted);
+            --muted: var(--text-muted);
+            --muted-soft: rgba(148, 163, 184, 0.6);
+            --accent-ink: var(--bg);
+            --success-bg: rgba(16, 185, 129, 0.15);
+            --danger-bg: rgba(239, 68, 68, 0.15);
+            --border-strong: rgba(255, 255, 255, 0.15);
+            --card-shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.45);
+            --motif-radius: 14px;
+            --motif-radius-sm: 8px;
+            --motif-radius-lg: 24px;
+            --motif-stroke: 3px;
+            --spring-default: cubic-bezier(0.4, 0, 0.2, 1);
+            --spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --duration-fast: 150ms;
+            --duration-normal: 300ms;
+            --duration-slow: 500ms;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 20px;
+            --space-lg: 32px;
+            --space-xl: 56px;
+            --space-2xl: 96px;
+            --space-3xl: 120px;
+            --max-width: 900px;
+            --page-margin: clamp(20px, 5vw, 48px);
+            --gutter: clamp(24px, 4vw, 64px);
+        }
+
+        body {
+            font-family: 'Tajawal', 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Premium Cosmic Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: #090d16;
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+                radial-gradient(at 90% 10%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 90%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
+                radial-gradient(at 80% 80%, rgba(244, 63, 94, 0.04) 0px, transparent 50%);
+            overflow: hidden;
+        }
+
+        .aurora {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            animation: moveAurora 25s infinite alternate ease-in-out;
+        }
+
+        .aurora-1 {
+            background: var(--primary);
+            top: -200px;
+            left: -200px;
+        }
+
+        .aurora-2 {
+            background: var(--secondary);
+            bottom: -200px;
+            right: -200px;
+            animation-delay: -10s;
+        }
+
+        .aurora-3 {
+            background: var(--accent);
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 35s;
+            opacity: 0.06;
+        }
+
+        @keyframes moveAurora {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(120px, 90px) scale(1.15); }
+            100% { transform: translate(-90px, -60px) scale(0.9); }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.03;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) { width: 80px; height: 80px; background: var(--primary); top: 15%; left: 12%; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 140px; height: 140px; background: var(--secondary); top: 65%; left: 82%; animation-delay: 3s; }
+        .shape:nth-child(3) { width: 70px; height: 70px; background: var(--accent); top: 35%; left: 75%; animation-delay: 5s; }
+        .shape:nth-child(4) { width: 110px; height: 110px; background: var(--primary); top: 82%; left: 18%; animation-delay: 7s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(40px, -40px) scale(1.1) rotate(120deg); }
+            66% { transform: translate(-30px, 30px) scale(0.95) rotate(240deg); }
+        }
+
+        /* Header & Glassmorphic Navigation */
+        .header {
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.6);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+            text-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #ffffff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .theme-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-right: auto;
+            margin-left: 2rem;
+        }
+
+        .theme-select {
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .theme-select:hover {
+            border-color: var(--primary);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 0.35rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .nav-tab {
+            padding: 0.65rem 1.35rem;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-tab:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-tab.active {
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Container & Glassmorphic Cards */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+        }
+
+        .glass-card {
+            background: var(--surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Timer Section */
+        .timer-section {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .timer-section.active {
+            display: block;
+        }
+
+        .timer-card {
+            padding: 4rem 3rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timer-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
+            animation: pulse 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.08); opacity: 0.7; }
+        }
+
+        .timer-modes {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 0.4rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .mode-btn {
+            padding: 0.65rem 1.5rem;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-btn:hover {
+            color: var(--text);
+        }
+
+        .mode-btn.active {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--primary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .timer-ring-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .progress-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 320px;
+        }
+
+        .progress-ring .bg, .progress-ring .progress {
+            fill: none;
+            stroke-width: 6;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+
+        .progress-ring .bg {
+            stroke: rgba(255, 255, 255, 0.04);
+        }
+
+        .progress-ring .progress {
+            stroke: url(#timer-gradient);
+            stroke-width: 8;
+            transition: stroke-dashoffset 0.3s linear;
+            filter: drop-shadow(0 0 12px var(--primary-glow));
+            opacity: 1;
+        }
+
+        /* Premium Analog Hand & Markers Styles */
+        .progress-ring .marker {
+            fill: rgba(255, 255, 255, 0.12);
+            transition: fill 0.3s ease, filter 0.3s ease;
+        }
+
+        .progress-ring .marker.active {
+            fill: var(--accent);
+            filter: drop-shadow(0 0 6px var(--accent));
+        }
+
+        /* Major markers (12, 3, 6, 9) */
+        .progress-ring .marker.major {
+            r: 4.5;
+            fill: rgba(255, 255, 255, 0.25);
+        }
+
+        .progress-ring .marker.major.active {
+            fill: var(--primary);
+            filter: drop-shadow(0 0 8px var(--primary-glow));
+        }
+
+        .hand-group {
+            will-change: transform;
+            transition: transform 0.05s linear;
+        }
+
+        /* Minute Hand - Realistic tapered shape */
+        .hand-minute-body {
+            fill: var(--primary);
+            filter: drop-shadow(0 0 8px var(--primary-glow-soft));
+        }
+
+        .hand-minute-inner {
+            fill: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Second Hand - Sleek red design */
+        .hand-second-line {
+            stroke: #ef4444;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            filter: drop-shadow(0 0 10px rgba(239,68,68,0.8));
+        }
+        .hand-second-tip {
+            fill: #ef4444;
+            filter: drop-shadow(0 0 10px rgba(239,68,68,0.9));
+        }
+        .hand-second-counterweight {
+            fill: #ef4444;
+            opacity: 0.7;
+        }
+
+        /* Center cap - Premium metallic look */
+        .hand-cap {
+            fill: linear-gradient(135deg, #334155, #1e293b);
+            stroke: var(--primary);
+            stroke-width: 2;
+            filter: drop-shadow(0 0 12px var(--primary-glow-soft));
+        }
+        .hand-cap-inner {
+            fill: var(--primary);
+        }
+        .hand-cap-shine {
+            fill: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Glow effect for hands */
+        .hand-minute-body {
+            filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.6));
+        }
+        
+        .hand-second-line {
+            stroke: #ef4444;
+            stroke-width: 2;
+            stroke-linecap: round;
+            filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.7));
+        }
+        
+        .hand-second-tip {
+            fill: #ef4444;
+            filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.9));
+        }
+        
+        .hand-second-counterweight {
+            fill: #dc2626;
+            filter: drop-shadow(0 0 4px rgba(220, 38, 38, 0.6));
+        }
+
+        /* Smooth sweep for minute hand (continuous) */
+        .hand-minute-sweep {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        .timer-content-wrapper {
+            position: absolute;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timer-display {
+            font-family: 'Outfit', 'Tajawal', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(135deg, var(--text), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .timer-label {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .control-btn {
+            padding: 0.9rem 2.25rem;
+            border-radius: 16px;
+            border: none;
+            font-family: inherit;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background: var(--surface-light);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon.blue { background: rgba(99, 102, 241, 0.15); box-shadow: 0 0 15px rgba(99, 102, 241, 0.1); }
+        .stat-icon.green { background: rgba(16, 185, 129, 0.15); box-shadow: 0 0 15px rgba(16, 185, 129, 0.1); }
+        .stat-icon.orange { background: rgba(245, 158, 11, 0.15); box-shadow: 0 0 15px rgba(245, 158, 11, 0.1); }
+        .stat-icon.purple { background: rgba(139, 92, 246, 0.15); box-shadow: 0 0 15px rgba(139, 92, 246, 0.1); }
+
+        .stat-value {
+            font-family: 'Outfit', 'Tajawal', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Tasks Section */
+        .tasks-section {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .tasks-section.active {
+            display: block;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text);
+            background: linear-gradient(135deg, #ffffff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .task-input-area {
+            padding: 1.75rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .task-input {
+            flex: 1;
+            padding: 0.9rem 1.25rem;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.4);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .task-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .task-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .select-input {
+            padding: 0.9rem 1.25rem;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.4);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .select-input:focus {
+            border-color: var(--primary);
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .add-btn {
+            padding: 0.9rem 2.25rem;
+            border-radius: 14px;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* Task Filters */
+        .task-filters {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(30, 41, 59, 0.4);
+            color: var(--text-muted);
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--text);
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .tasks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .task-item {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideIn 0.35s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .task-item:hover {
+            border-color: var(--primary);
+            transform: translateX(-4px);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .task-item.completed {
+            opacity: 0.55;
+            background: rgba(255, 255, 255, 0.01);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .task-checkbox {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .task-checkbox:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .task-checkbox.checked {
+            background: var(--success);
+            border-color: var(--success);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        .task-tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .tag-study { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; }
+        .tag-review { background: rgba(245, 158, 11, 0.15); color: #fcd34d; }
+        .tag-exam { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }
+        .tag-homework { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
+
+        .tag-priority-high { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tag-priority-medium { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .tag-priority-low { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3); }
+
+        .task-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface-light);
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .action-btn:hover {
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .action-btn.delete-btn:hover {
+            background: var(--danger);
+            border-color: var(--danger);
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+        }
+
+        .action-btn.edit-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Focus Mode */
+        .focus-section {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .focus-section.active {
+            display: block;
+        }
+
+        .focus-container {
+            text-align: center;
+            padding: 3rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .focus-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .focus-subtitle {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .breathing-circle-container {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .breathing-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            animation: breathe 4s ease-in-out infinite;
+            animation-play-state: paused;
+            box-shadow: 0 0 50px rgba(99, 102, 241, 0.3);
+            z-index: 1;
+            transition: all 0.5s ease;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.85; filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.4)); }
+            50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 45px rgba(99, 102, 241, 0.7)); }
+        }
+
+        .breathing-guide {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-top: 1.5rem;
+            min-height: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .focus-timer {
+            font-family: 'Outfit', 'Tajawal', sans-serif;
+            font-size: 7.5rem;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            margin: 1.5rem 0;
+            color: var(--text);
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .focus-quote {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-style: italic;
+            max-width: 600px;
+            margin: 2.5rem auto 1.5rem;
+            padding: 1.5rem 2rem;
+            border-right: 4px solid var(--primary);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            line-height: 1.7;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .progress-section.active {
+            display: block;
+        }
+
+        .chart-container {
+            padding: 2.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .chart-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 250px;
+            gap: 1rem;
+            padding: 1.5rem 0.5rem 0.5rem;
+            background: rgba(15, 23, 42, 0.3);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .bar-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .bar {
+            width: 100%;
+            max-width: 45px;
+            background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
+            border-radius: 8px 8px 4px 4px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            min-height: 8px;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.15);
+        }
+
+        .bar:hover {
+            filter: brightness(1.2) drop-shadow(0 0 12px rgba(139, 92, 246, 0.4));
+            transform: scaleY(1.02);
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Outfit', 'Tajawal', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .bar-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .achievement-card {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--warning);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.1);
+        }
+
+        .achievement-card.locked {
+            opacity: 0.5;
+        }
+
+        .achievement-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-icon.unlocked {
+            background: linear-gradient(135deg, var(--warning), #f97316);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            color: white;
+        }
+
+        .achievement-icon.locked {
+            background: var(--surface-light);
+            color: var(--text-muted);
+        }
+
+        .achievement-info {
+            flex: 1;
+        }
+
+        .achievement-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--text);
+        }
+
+        .achievement-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Music Section */
+        .music-section {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .music-section.active {
+            display: block;
+        }
+
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .music-card {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .music-card.featured {
+            grid-column: 1 / -1;
+        }
+
+        .music-header {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .music-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .music-icon.nature { background: linear-gradient(135deg, #0ea5e9, #06b6d4); }
+        .music-icon.chillhop { background: linear-gradient(135deg, #f59e0b, #f97316); }
+        .music-icon.binaural { background: linear-gradient(135deg, #8b5cf6, #a855f7); }
+
+        .music-info h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .music-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .live-badge {
+            margin-right: auto;
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .video-link-area {
+            padding: 1.25rem 1.5rem;
+            background: rgba(15, 23, 42, 0.2);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .video-link-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .video-link-input-group {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .video-link-input {
+            flex: 1;
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.4);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .video-link-input:focus {
+            border-color: var(--primary);
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .video-link-btn {
+            padding: 0.85rem 1.5rem;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .video-link-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .video-presets {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .preset-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-left: 0.25rem;
+            font-weight: 600;
+        }
+
+        .video-preset-chip {
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.4);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-preset-chip:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .placeholder-content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .placeholder-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .placeholder-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .direct-link-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+        }
+
+        .direct-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .music-controls-bar {
+            padding: 1rem 1.5rem;
+            display: flex;
+            gap: 1rem;
+            background: rgba(15, 23, 42, 0.3);
+        }
+
+        .music-control-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .music-control-btn.secondary {
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            color: var(--text);
+            flex: 0 0 auto;
+        }
+
+        .music-control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .sound-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            padding: 1.5rem;
+        }
+
+        .sound-btn {
+            padding: 0.9rem 1rem;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.3);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-align: right;
+        }
+
+        .sound-btn:hover {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sound-btn.active {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+        }
+
+        .sound-emoji {
+            font-size: 1.35rem;
+        }
+
+        .sound-name {
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .sound-status {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .volume-control {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .volume-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+        }
+
+        .channel-list {
+            padding: 0.5rem;
+        }
+
+        .channel-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.9rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            margin: 0.35rem 0.5rem;
+            border: 1px solid transparent;
+        }
+
+        .channel-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--border);
+            transform: translateX(-4px);
+        }
+
+        .channel-emoji {
+            font-size: 1.35rem;
+        }
+
+        .channel-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .channel-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .channel-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .channel-arrow {
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .channel-item:hover .channel-arrow {
+            transform: translateX(-2px);
+        }
+
+        .binaural-controls {
+            padding: 1.5rem;
+        }
+
+        .freq-control {
+            margin-bottom: 1.5rem;
+        }
+
+        .freq-control label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .freq-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+
+        .freq-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+        }
+
+        .binaural-presets {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .preset-btn {
+            padding: 0.75rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.3);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .preset-btn:hover {
+            border-color: var(--secondary);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Layouts */
+        @media (max-width: 900px) {
+            .header {
+                padding: 1.25rem 1.5rem;
+                flex-direction: column;
+                gap: 1.25rem;
+            }
+
+            .theme-selector {
+                margin: 0;
+            }
+
+            .nav-tabs {
+                width: 100%;
+                overflow-x: auto;
+                justify-content: flex-start;
+                scrollbar-width: none; /* Firefox */
+            }
+
+            .nav-tabs::-webkit-scrollbar {
+                display: none; /* Chrome/Safari */
+            }
+
+            .nav-tab {
+                white-space: nowrap;
+                padding: 0.6rem 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .timer-display {
+                font-size: 4.5rem;
+            }
+
+            .focus-timer {
+                font-size: 5.5rem;
+            }
+
+            .timer-card {
+                padding: 3rem 1.5rem 2.5rem;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .select-input, .add-btn {
+                width: 100%;
+            }
+
+            .music-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sound-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .video-link-input-group {
+                flex-direction: column;
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid var(--primary);
+            color: var(--text);
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            font-weight: 600;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Alarm overlay */
+        #alarm-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+        }
+        #alarm-overlay.active {
+            display: flex;
+        }
+        .alarm-box {
+            background: var(--surface);
+            border: 1px solid var(--primary);
+            border-radius: 24px;
+            padding: 3rem 4rem;
+            text-align: center;
+            animation: alarmPulse 0.6s ease-in-out infinite alternate;
+        }
+        .alarm-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        .alarm-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        .alarm-sub {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        .alarm-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 2.5rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .alarm-btn:hover {
+            opacity: 0.85;
+        }
+        @keyframes alarmPulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99,102,241,0.4); }
+            100% { transform: scale(1.03); box-shadow: 0 0 30px 10px rgba(99,102,241,0.2); }
+        }
+
+        /* ==========================================
+           NEW TASKS DESIGN — One Motif (Checkmark)
+           ========================================== */
+        .motif-check {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            flex-shrink: 0;
+        }
+        .motif-check svg {
+            width: 100%;
+            height: 100%;
+            stroke: currentColor;
+            stroke-width: var(--motif-stroke);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+        .motif-check.filled svg { fill: currentColor; stroke: none; }
+        .motif-check.circle svg { stroke-dasharray: 28; stroke-dashoffset: 28; }
+        .motif-check.completed.circle svg { stroke-dashoffset: 0; transition: stroke-dashoffset var(--duration-normal) var(--spring-bounce); }
+        .motif-check.completed .check-path { stroke-dashoffset: 0; transition: stroke-dashoffset var(--duration-normal) var(--spring-bounce) 100ms; }
+
+        .motif-container {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-high);
+            border: 2px solid var(--border);
+            transition: all var(--duration-normal) var(--spring-default);
+        }
+        .motif-container.completed {
+            background: var(--success);
+            border-color: var(--success);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+        .motif-container.completed .motif-check { color: var(--bg); }
+        .motif-container:hover:not(.completed) { border-color: var(--accent); transform: scale(1.05); }
+        .motif-container:active:not(.completed) { transform: scale(0.95); }
+
+        .statement {
+            font-size: clamp(1.5rem, 2vw, 2.5rem);
+            line-height: 1.2;
+            font-weight: 500;
+            color: var(--ink);
+            max-width: 66ch;
+            margin: 0 auto;
+        }
+        .statement .inline-thumb {
+            display: inline-flex;
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.1em;
+            margin: 0 0.12em;
+            border-radius: 0.14em;
+            overflow: hidden;
+            background: var(--bg-high);
+        }
+
+        .category-label {
+            font-size: clamp(1.5rem, 3.4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            color: var(--ink);
+        }
+        .category-count {
+            font-size: var(--step-small, 0.875rem);
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .section { margin-bottom: var(--space-3xl); }
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: var(--space-xl);
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .intro-section { text-align: center; padding: var(--space-3xl) 0; }
+        .intro-statement { margin-bottom: var(--space-2xl); }
+        .intro-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            color: var(--muted);
+            font-size: var(--step-small, 0.875rem);
+        }
+        .stat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-md);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-weight: 500;
+        }
+        .stat-pill .value { color: var(--accent); font-weight: 700; }
+
+        .tasks-list-section { }
+        .task-category-group { margin-bottom: var(--space-3xl); }
+        .category-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
+        }
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--gutter) var(--space-md);
+        }
+        @media (max-width: 700px) { .task-grid { grid-template-columns: 1fr; } }
+
+        .task-card {
+            position: relative;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--motif-radius-lg);
+            padding: var(--space-lg);
+            transition: all var(--duration-normal) var(--spring-default);
+            animation: slideInUp var(--duration-slow) var(--spring-default) both;
+            will-change: transform, box-shadow, border-color;
+        }
+        .task-card:hover {
+            border-color: var(--border-strong);
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-4px);
+        }
+        .task-card:active { transform: translateY(-2px) scale(0.99); transition-duration: 50ms; }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .task-card:nth-child(1) { animation-delay: 60ms; }
+        .task-card:nth-child(2) { animation-delay: 120ms; }
+        .task-card:nth-child(3) { animation-delay: 180ms; }
+        .task-card:nth-child(4) { animation-delay: 240ms; }
+        .task-card:nth-child(5) { animation-delay: 300ms; }
+        .task-card:nth-child(6) { animation-delay: 360ms; }
+        .task-card.completed { opacity: 0.6; border-color: var(--success); background: var(--success-bg); }
+        .task-card.completed .task-title { text-decoration: line-through; color: var(--muted); }
+
+        .task-main { display: flex; align-items: flex-start; gap: var(--space-md); }
+        .task-checkbox-wrapper { position: relative; flex-shrink: 0; margin-top: 2px; }
+        .task-content { flex: 1; min-width: 0; }
+        .task-title {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.4;
+            margin-bottom: var(--space-sm);
+            word-break: break-word;
+            transition: all var(--duration-normal) var(--spring-default);
+        }
+        .task-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+        .task-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 0.02em;
+        }
+        .tag-study { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
+        .tag-review { background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
+        .tag-exam { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+        .tag-homework { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+        .tag-priority-high { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tag-priority-medium { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .tag-priority-low { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .task-date { color: var(--muted-soft); font-weight: 500; }
+
+        .task-actions {
+            display: flex;
+            gap: var(--space-xs);
+            margin-top: var(--space-md);
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all var(--duration-normal) var(--spring-default);
+        }
+        .task-card:hover .task-actions { opacity: 1; transform: translateY(0); }
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: var(--motif-radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg-high);
+            color: var(--muted);
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--spring-default);
+        }
+        .action-btn:hover { color: var(--ink); border-color: var(--accent); transform: scale(1.1); }
+        .action-btn.delete:hover { background: var(--danger-bg); border-color: var(--danger); color: var(--danger); }
+        .action-btn.edit:hover { background: rgba(99, 102, 241, 0.2); border-color: #6366f1; color: #a5b4fc; }
+
+        .add-task-form {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--motif-radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-3xl);
+            animation: slideInUp var(--duration-slow) var(--spring-default) both;
+        }
+        .form-row { display: flex; gap: var(--space-md); flex-wrap: wrap; align-items: flex-end; }
+        .form-field { flex: 1; min-width: 180px; }
+        .form-field.full-width { flex-basis: 100%; }
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: var(--space-xs);
+        }
+        .form-input, .form-select {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            font-family: inherit;
+            font-size: 1.0625rem;
+            background: var(--bg-high);
+            border: 1px solid var(--border);
+            border-radius: var(--motif-radius-sm);
+            color: var(--ink);
+            transition: all var(--duration-fast) var(--spring-default);
+        }
+        .form-input::placeholder { color: var(--muted-soft); }
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+            background: var(--bg-elevated);
+        }
+        .form-select { cursor: pointer; appearance: none; }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-xl);
+            font-family: inherit;
+            font-size: 1.0625rem;
+            font-weight: 700;
+            color: var(--bg);
+            background: var(--accent);
+            border: none;
+            border-radius: var(--motif-radius-sm);
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--spring-default);
+            white-space: nowrap;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(6, 182, 212, 0.35); filter: brightness(1.05); }
+        .btn-primary:active { transform: translateY(0) scale(0.98); }
+        .btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.5); }
+
+        .filters-bar {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: var(--space-xs) var(--space-md);
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--muted);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--spring-default);
+        }
+        .filter-btn:hover { color: var(--ink); border-color: var(--accent); }
+        .filter-btn.active { color: var(--bg); background: var(--accent); border-color: var(--accent); box-shadow: 0 4px 16px rgba(6, 182, 212, 0.3); }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--space-3xl) var(--space-xl);
+            color: var(--muted);
+        }
+        .empty-state .icon { font-size: 4rem; margin-bottom: var(--space-lg); opacity: 0.5; }
+        .empty-state h3 { font-size: 1.625rem; color: var(--ink); margin-bottom: var(--space-sm); }
+
+        .cta-band {
+            position: relative;
+            background: var(--accent);
+            border-radius: var(--motif-radius-lg);
+            padding: var(--space-3xl) var(--space-xl);
+            min-height: 60svh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .cta-band::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(15, 23, 42, 0.3) 100%);
+            pointer-events: none;
+        }
+        .cta-word {
+            font-size: clamp(4rem, 15vw, 10rem);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            line-height: 1;
+            color: var(--bg);
+            margin-bottom: var(--space-xl);
+            transition: all var(--duration-normal) var(--spring-default);
+        }
+        .cta-band:hover .cta-word { transform: scale(1.02); }
+        .cta-band:active .cta-word { transform: scale(0.98); transition-duration: 50ms; }
+        .cta-desc {
+            position: absolute;
+            top: var(--space-lg);
+            left: var(--space-lg);
+            right: var(--space-lg);
+            font-size: 0.875rem;
+            color: rgba(15, 23, 42, 0.7);
+            line-height: 1.5;
+            max-width: 40ch;
+            margin: 0 auto;
+        }
+        .cta-arrow {
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            width: 48px;
+            height: 48px;
+            color: var(--bg);
+            opacity: 0.7;
+            transition: all var(--duration-normal) var(--spring-bounce);
+        }
+        .cta-band:hover .cta-arrow { transform: translate(-4px, -4px); opacity: 1; }
+        @media (max-width: 600px) {
+            .cta-band { min-height: 46svh; padding: var(--space-2xl) var(--space-lg); }
+            .cta-desc { font-size: 0.875rem; top: var(--space-md); left: var(--space-md); right: var(--space-md); }
+            .cta-arrow { width: 32px; height: 32px; top: var(--space-md); right: var(--space-md); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .task-card { animation: none; opacity: 1; transform: none; }
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        .action-btn:focus-visible, .filter-btn:focus-visible, .motif-container:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+    </style>
+    <base target="_blank">
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="aurora aurora-3"></div>
+    
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">🎯</div>
+            <span>فوكس</span>
+        </div>
+        
+        <div class="theme-selector">
+            <select id="theme-select" class="theme-select" onchange="changeTheme(this.value)">
+                <option value="cosmic">🌌 كوني</option>
+                <option value="sunset">🌅 غروب</option>
+                <option value="emerald">🌿 زمردي</option>
+                <option value="ocean">🌊 محيط</option>
+            </select>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('timer', this)">⏱️ المؤقت</button>
+            <button class="nav-tab" onclick="showSection('tasks', this)">📝 المهام</button>
+            <button class="nav-tab" onclick="showSection('focus', this)">🧘 التركيز</button>
+            <button class="nav-tab" onclick="showSection('music', this)">🎵 الموسيقى</button>
+            <button class="nav-tab" onclick="showSection('progress', this)">📊 التقدم</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Timer Section -->
+        <section id="timer-section" class="timer-section active">
+            <div class="timer-card glass-card">
+                <div class="timer-ring-container">
+                    <svg class="progress-ring" width="320" height="320">
+                        <defs>
+                            <linearGradient id="timer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1"/>
+                                <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1"/>
+                            </linearGradient>
+                            <linearGradient id="hand-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:var(--primary)"/>
+                                <stop offset="50%" style="stop-color:#818cf8"/>
+                                <stop offset="100%" style="stop-color:var(--primary)"/>
+                            </linearGradient>
+                        </defs>
+                        <circle class="bg" cx="160" cy="160" r="150" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="6"></circle>
+                        <circle class="progress" cx="160" cy="160" r="150" 
+                                stroke="url(#timer-gradient)" stroke-width="8" stroke-dasharray="942.5" stroke-dashoffset="0" id="progress-circle" fill="none"></circle>
+                        <!-- Minute Hand - Realistic tapered design -->
+                        <g id="minute-hand" class="hand-group" style="transform: rotate(0deg); transform-origin: 160px 160px;">
+                            <!-- Main hand body - tapered -->
+                            <path class="hand-minute-body" d="M 157 175 L 160 25 L 163 175 Z" fill="url(#hand-gradient)"/>
+                            <!-- Center notch -->
+                            <rect class="hand-minute-inner" x="158" y="165" width="4" height="8" rx="1" fill="rgba(255,255,255,0.2)"/>
+                        </g>
+                        <!-- Second Hand - Sleek needle design -->
+                        <g id="second-hand" class="hand-group" style="transform: rotate(0deg); transform-origin: 160px 160px;">
+                            <!-- Counterweight tail -->
+                            <circle class="hand-second-counterweight" cx="160" cy="178" r="4"/>
+                            <!-- Main line -->
+                            <line class="hand-second-line" x1="160" y1="175" x2="160" y2="22"/>
+                            <!-- Tip -->
+                            <circle class="hand-second-tip" cx="160" cy="22" r="4"/>
+                        </g>
+                        <!-- Center Cap - Premium metallic -->
+                        <circle class="hand-cap" cx="160" cy="160" r="10"/>
+                        <circle class="hand-cap-inner" cx="160" cy="160" r="4"/>
+                        <circle class="hand-cap-shine" cx="157" cy="157" r="2"/>
+                    </svg>
+                    <div class="timer-content-wrapper">
+                        <div class="timer-display" id="timer-display">25:00</div>
+                        <div class="timer-label" id="timer-label">جلسة تركيز</div>
+                    </div>
+                </div>
+
+                <div class="timer-modes">
+                    <button class="mode-btn active" id="mode-pomodoro" onclick="setMode('pomodoro')">🍅 بومودورو</button>
+                    <button class="mode-btn" id="mode-short" onclick="setMode('short')">☕ راحة قصيرة</button>
+                    <button class="mode-btn" id="mode-long" onclick="setMode('long')">🌙 راحة طويلة</button>
+                </div>
+
+                <div class="timer-controls">
+                    <button class="control-btn btn-primary" id="start-btn" onclick="toggleTimer()">
+                        ▶️ ابدأ
+                    </button>
+                    <button class="control-btn btn-secondary" onclick="resetTimer()">
+                        🔄 إعادة
+                    </button>
+                </div>
+
+                <div class="timer-settings" style="margin-top: 1.75rem; display: flex; justify-content: center; align-items: center; gap: 1.2rem; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 0.6rem;">
+                        <label style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">🔔 نغمة المنبه:</label>
+                        <select id="alarm-sound-select" class="select-input" style="padding: 0.4rem 0.8rem; min-width: auto; font-size: 0.9rem;">
+                            <option value="chime">✨ رنين لطيف</option>
+                            <option value="bowl">🧘 وعاء التبت</option>
+                            <option value="digital">📟 منبه رقمي</option>
+                            <option value="ascending">📈 تصاعدي</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.6rem;">
+                        <label style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">⏱️ تخصيص الوقت (دقيقة):</label>
+                        <input type="number" id="custom-time-input" class="select-input" style="padding: 0.4rem 0.8rem; width: 75px; font-size: 0.9rem; text-align: center;" min="1" max="180" value="25" onchange="setCustomTime(this.value)">
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-row" style="margin-top: 2rem;">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon blue">🍅</div>
+                    <div class="stat-value" id="pomodoros-today">0</div>
+                    <div class="stat-label">جلسات اليوم</div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon green">⏱️</div>
+                    <div class="stat-value" id="focus-time">0</div>
+                    <div class="stat-label">دقيقة تركيز</div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon orange">🔥</div>
+                    <div class="stat-value" id="streak">0</div>
+                    <div class="stat-label">أيام متتالية</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tasks Section — New One Motif Design -->
+        <section id="tasks-section" class="tasks-section">
+            <div class="intro-section" aria-labelledby="tasks-heading">
+                <div class="intro-statement">
+                    <p class="statement">
+                        كل مهمة <span class="inline-thumb" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);"></span> 
+                        تقربك <span class="inline-thumb" style="background: linear-gradient(135deg, #10b981, #34d399);"></span> 
+                        من هدفك <span class="inline-thumb" style="background: linear-gradient(135deg, #f59e0b, #f97316);"></span>
+                    </p>
+                </div>
+                <div class="intro-meta">
+                    <span class="stat-pill">
+                        <span class="value" id="total-tasks-count">0</span> مهام إجمالية
+                    </span>
+                    <span class="stat-pill">
+                        <span class="value" id="completed-tasks-count">0</span> مكتملة
+                    </span>
+                    <span class="stat-pill">
+                        <span class="value" id="progress-percent-count">0%</span> إنجاز
+                    </span>
+                </div>
+            </div>
+
+            <form class="add-task-form" id="add-task-form" aria-label="إضافة مهمة جديدة">
+                <div class="form-row">
+                    <div class="form-field full-width">
+                        <label class="form-label" for="task-input">نص المهمة</label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="task-input" 
+                            placeholder="ماذا تريد أن تنجز اليوم؟"
+                            aria-label="نص المهمة"
+                            required
+                        >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label class="form-label" for="task-category">النوع</label>
+                        <select class="form-select" id="task-category" aria-label="نوع المهمة">
+                            <option value="study">📚 مذاكرة</option>
+                            <option value="review">🔄 مراجعة</option>
+                            <option value="exam">📝 امتحان</option>
+                            <option value="homework">✏️ واجب</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label" for="task-priority">الأولوية</label>
+                        <select class="form-select" id="task-priority" aria-label="أولوية المهمة">
+                            <option value="high">🔴 هام جداً</option>
+                            <option value="medium" selected>⚡ متوسط</option>
+                            <option value="low">🟢 منخفض</option>
+                        </select>
+                    </div>
+                    <div class="form-field" style="flex: 0 0 auto;">
+                        <button type="submit" class="btn-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            إضافة
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="filters-bar" role="tablist" aria-label="فلترة المهام">
+                <button class="filter-btn active" role="tab" aria-selected="true" data-filter="all">الكل</button>
+                <button class="filter-btn" role="tab" aria-selected="false" data-filter="active">النشطة</button>
+                <button class="filter-btn" role="tab" aria-selected="false" data-filter="completed">المكتملة</button>
+            </div>
+
+            <div class="tasks-list-section" aria-labelledby="tasks-list-heading">
+                <div class="task-category-group" id="study-group">
+                    <div class="category-header">
+                        <h2 class="category-label">📚 مذاكرة</h2>
+                        <span class="category-count" id="study-count">0 مهمة</span>
+                    </div>
+                    <div class="task-grid" id="study-grid" role="list"></div>
+                </div>
+
+                <div class="task-category-group" id="review-group">
+                    <div class="category-header">
+                        <h2 class="category-label">🔄 مراجعة</h2>
+                        <span class="category-count" id="review-count">0 مهمة</span>
+                    </div>
+                    <div class="task-grid" id="review-grid" role="list"></div>
+                </div>
+
+                <div class="task-category-group" id="exam-group">
+                    <div class="category-header">
+                        <h2 class="category-label">📝 امتحان</h2>
+                        <span class="category-count" id="exam-count">0 مهمة</span>
+                    </div>
+                    <div class="task-grid" id="exam-grid" role="list"></div>
+                </div>
+
+                <div class="task-category-group" id="homework-group">
+                    <div class="category-header">
+                        <h2 class="category-label">✏️ واجب</h2>
+                        <span class="category-count" id="homework-count">0 مهمة</span>
+                    </div>
+                    <div class="task-grid" id="homework-grid" role="list"></div>
+                </div>
+
+                <div class="empty-state" id="empty-state" hidden>
+                    <div class="icon">📝</div>
+                    <h3>لا توجد مهام</h3>
+                    <p>ابدأ بإضافة أول مهمة لك أعلاه</p>
+                </div>
+            </div>
+
+            <div class="cta-band" role="button" tabindex="0" aria-label="إضافة مهمة جديدة">
+                <p class="cta-desc">اضغط لإضافة مهمة جديدة والبدء في الإنجاز</p>
+                <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 15l-6-6-6 6"/>
+                </svg>
+                <span class="cta-word">أضف</span>
+            </div>
+        </section>
+
+        <!-- Focus Section -->
+        <section id="focus-section" class="focus-section">
+            <div class="focus-container">
+                <h2 class="focus-title">وضع التركيز العميق</h2>
+                <p class="focus-subtitle">اغلق كل المشتتات وركز على هدفك الواحد</p>
+
+                <div class="breathing-circle-container">
+                    <div class="breathing-circle" id="breathing-circle">🧘</div>
+                </div>
+                <div class="breathing-guide" id="breathing-guide-text">تنفس بعمق... شهيق... زفير...</div>
+
+                <div class="focus-timer" id="focus-timer">25:00</div>
+
+                <div class="timer-controls">
+                    <button class="control-btn btn-primary" id="focus-start-btn" onclick="toggleTimer()">
+                        ▶️ ابدأ التركيز
+                    </button>
+                    <button class="control-btn btn-secondary" onclick="resetTimer()">
+                        🔄 إعادة
+                    </button>
+                </div>
+
+                <div class="focus-quote" id="focus-quote">
+                    "التركيز ليس على القيام بالمزيد، بل على القيام بما يهم حقاً."
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Section -->
+        <section id="music-section" class="music-section">
+            <div class="section-header">
+                <h2 class="section-title">🎵 موسيقى التركيز</h2>
+            </div>
+
+            <div class="music-grid">
+                <!-- Removed YouTube video player -->
+                <div class="music-card featured glass-card">
+                    <div class="music-header">
+                        <div class="music-icon">🎧</div>
+                        <div class="music-info">
+                            <h3>موسيقى التركيز</h3>
+                            <p>تم إزالة مشغل YouTube المباشر. يمكنك استخدام قوائم التشغيل الخارجية أو تشغيل الصوت من المتصفح مباشرة.</p>
+                        </div>
+                        <span class="live-badge">🎵 MUSIC</span>
+                    </div>
+                </div>
+
+                <!-- Nature Sounds Generator -->
+                <div class="music-card glass-card">
+                    <div class="music-header">
+                        <div class="music-icon nature">🌧️</div>
+                        <div class="music-info">
+                            <h3>أصوات الطبيعة</h3>
+                            <p>مولد أصوات مدمج - لا يحتاج إنترنت</p>
+                        </div>
+                    </div>
+                    <div class="sound-buttons">
+                        <button class="sound-btn" id="btn-rain" onclick="toggleNatureSound('rain')">
+                            <span class="sound-emoji">🌧️</span>
+                            <span class="sound-name">مطر هادئ</span>
+                            <span class="sound-status" id="status-rain">▶️</span>
+                        </button>
+                        <button class="sound-btn" id="btn-forest" onclick="toggleNatureSound('forest')">
+                            <span class="sound-emoji">🌲</span>
+                            <span class="sound-name">حفيف الغابة</span>
+                            <span class="sound-status" id="status-forest">▶️</span>
+                        </button>
+                        <button class="sound-btn" id="btn-ocean" onclick="toggleNatureSound('ocean')">
+                            <span class="sound-emoji">🌊</span>
+                            <span class="sound-name">موج البحر</span>
+                            <span class="sound-status" id="status-ocean">▶️</span>
+                        </button>
+                        <button class="sound-btn" id="btn-fire" onclick="toggleNatureSound('fire')">
+                            <span class="sound-emoji">🔥</span>
+                            <span class="sound-name">نار التخييم</span>
+                            <span class="sound-status" id="status-fire">▶️</span>
+                        </button>
+                        <button class="sound-btn" id="btn-wind" onclick="toggleNatureSound('wind')">
+                            <span class="sound-emoji">💨</span>
+                            <span class="sound-name">رياح الجبل</span>
+                            <span class="sound-status" id="status-wind">▶️</span>
+                        </button>
+                        <button class="sound-btn" id="btn-white" onclick="toggleNatureSound('white')">
+                            <span class="sound-emoji">📻</span>
+                            <span class="sound-name">ضوضاء بيضاء</span>
+                            <span class="sound-status" id="status-white">▶️</span>
+                        </button>
+                    </div>
+                    <div class="volume-control">
+                        <span>🔊</span>
+                        <input type="range" min="0" max="100" value="50" class="volume-slider" id="nature-volume" oninput="setNatureVolume(this.value)">
+                        <span id="volume-display" style="min-width: 40px; font-weight: 700;">50%</span>
+                    </div>
+                </div>
+
+                <!-- Other Channels -->
+                <div class="music-card glass-card">
+                    <div class="music-header">
+                        <div class="music-icon chillhop">🎹</div>
+                        <div class="music-info">
+                            <h3>قنوات خارجية</h3>
+                            <p>اختر الموسيقى المناسبة لك</p>
+                        </div>
+                    </div>
+                    <div class="channel-list">
+                        <a href="https://www.youtube.com/@ChillhopMusic" target="_blank" class="channel-item">
+                            <span class="channel-emoji">🎷</span>
+                            <div class="channel-info">
+                                <span class="channel-name">Chillhop Music</span>
+                                <span class="channel-desc">جاز وlo-fi هادئ</span>
+                            </div>
+                            <span class="channel-arrow">←</span>
+                        </a>
+                        <a href="https://www.youtube.com/@jazzhopcafe" target="_blank" class="channel-item">
+                            <span class="channel-emoji">🎺</span>
+                            <div class="channel-info">
+                                <span class="channel-name">The Jazz Hop Cafe</span>
+                                <span class="channel-desc">مزيج من الجاز والهيب هوب</span>
+                            </div>
+                            <span class="channel-arrow">←</span>
+                        </a>
+                        <a href="https://www.youtube.com/@HALIDONMUSIC" target="_blank" class="channel-item">
+                            <span class="channel-emoji">🎻</span>
+                            <div class="channel-info">
+                                <span class="channel-name">HALIDONMUSIC</span>
+                                <span class="channel-desc">موسيقى كلاسيكية للدراسة</span>
+                            </div>
+                            <span class="channel-arrow">←</span>
+                        </a>
+                        <a href="https://www.youtube.com/@cafemusicbgmchannel" target="_blank" class="channel-item">
+                            <span class="channel-emoji">☕</span>
+                            <div class="channel-info">
+                                <span class="channel-name">Cafe Music BGM</span>
+                                <span class="channel-desc">أجواء المقهى للتركيز</span>
+                            </div>
+                            <span class="channel-arrow">←</span>
+                        </a>
+                        <a href="https://www.youtube.com/@YellowBrickCinema" target="_blank" class="channel-item">
+                            <span class="channel-emoji">🧘</span>
+                            <div class="channel-info">
+                                <span class="channel-name">Yellow Brick Cinema</span>
+                                <span class="channel-desc">موسيقى هادئة وambient</span>
+                            </div>
+                            <span class="channel-arrow">←</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Binaural Beats -->
+                <div class="music-card glass-card">
+                    <div class="music-header">
+                        <div class="music-icon binaural">🧠</div>
+                        <div class="music-info">
+                            <h3>نبضات بيانورال</h3>
+                            <p>مع لوحة خلفية هادئة (استخدم سماعات)</p>
+                        </div>
+                    </div>
+                    <div class="binaural-controls">
+                        <div class="freq-control">
+                            <label>التردد المتردد (Hz): <span id="freq-value">40</span></label>
+                            <input type="range" min="1" max="100" value="40" class="freq-slider" id="binaural-freq" oninput="updateBinauralFreq(this.value)">
+                        </div>
+                        <div class="binaural-presets">
+                            <button class="preset-btn" onclick="setBinauralPreset(10)">🎯 تركيز ودراسة (Alpha)</button>
+                            <button class="preset-btn" onclick="setBinauralPreset(20)">💡 تفكير وإبداع (Beta)</button>
+                            <button class="preset-btn" onclick="setBinauralPreset(40)">🧘 استرخاء عميق (Gamma)</button>
+                            <button class="preset-btn" onclick="setBinauralPreset(7)">😴 نوم عميق (Theta)</button>
+                        </div>
+                        <button class="control-btn btn-primary" id="binaural-toggle" onclick="toggleBinaural()" style="width: 100%; margin-top: 1.5rem; justify-content: center;">
+                            ▶️ تشغيل البيانورال
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section id="progress-section" class="progress-section">
+            <div class="section-header">
+                <h2 class="section-title">📊 تقدمك الدراسي</h2>
+            </div>
+
+            <div class="chart-container glass-card">
+                <div class="chart-title">
+                    <span>ساعات الدراسة هذا الأسبوع</span>
+                    <span id="total-weekly-hours-label" style="font-size: 0.95rem; color: var(--primary);">المجموع: 0 ساعة</span>
+                </div>
+                <div class="bar-chart" id="weekly-chart"></div>
+            </div>
+
+            <div class="section-header" style="margin-top: 2rem;">
+                <h2 class="section-title">🏆 الإنجازات والأوسمة</h2>
+            </div>
+
+            <div class="achievements" id="achievements-list"></div>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 2.5rem;">
+                <button class="filter-btn" style="border-color: var(--danger); color: var(--danger); font-weight: 700;" onclick="resetAllData()">⚠️ إعادة تعيين كافة البيانات</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Data Management (Fixed double storage & streak bugs)
+        let data = {
+            pomodorosToday: parseInt(localStorage.getItem('pomodorosToday') || '0'),
+            totalPomodoros: parseInt(localStorage.getItem('totalPomodoros') || '0'),
+            focusMinutes: parseInt(localStorage.getItem('focusMinutes') || '0'),
+            streak: parseInt(localStorage.getItem('streak') || '0'),
+            lastStudyDate: localStorage.getItem('lastStudyDate') || null,
+            tasks: JSON.parse(localStorage.getItem('tasks') || '[]'),
+            weeklyHours: JSON.parse(localStorage.getItem('weeklyHours') || '[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]')
+        };
+
+        // Timer Variables (Synced Timer State)
+        let timerInterval = null;
+        let currentMode = 'pomodoro';
+        let timeLeft = 25 * 60;
+        let totalTime = 25 * 60;
+        let isRunning = false;
+        let currentTaskFilter = 'all';
+
+        const modes = {
+            pomodoro: { time: 25 * 60, label: 'جلسة تركيز' },
+            short: { time: 5 * 60, label: 'راحة قصيرة' },
+            long: { time: 15 * 60, label: 'راحة طويلة' }
+        };
+
+        const quotes = [
+            "التركيز ليس على القيام بالمزيد، بل على القيام بما يهم حقاً.",
+            "كل دقيقة تركيز تقربك خطوة من هدفك.",
+            "العقل المتركز هو العقل المنتج.",
+            "النجاح يأتي من التراكم اليومي للجهود المتركزة.",
+            "ركز على الخطوة التالية، وليس على كل الدرج.",
+            "الانضباط هو الجسر بين الأهداف والإنجازات."
+        ];
+
+        const achievements = [
+            { id: 1, icon: '🌱', title: 'البداية', desc: 'أكمل أول جلسة بومودورو', requirement: 1, type: 'totalPomodoros' },
+            { id: 2, icon: '🔥', title: 'المحترف اليومي', desc: 'أكمل 5 جلسات في يوم واحد', requirement: 5, type: 'pomodoros' },
+            { id: 3, icon: '⭐', title: 'النجم الساطع', desc: 'أكمل 10 جلسات تركيز إجمالية', requirement: 10, type: 'totalPomodoros' },
+            { id: 4, icon: '📚', title: 'المنظم الملتزم', desc: 'أكمل 5 مهام دراسية بنجاح', requirement: 5, type: 'tasks' },
+            { id: 5, icon: '🏆', title: 'البطل الأسبوعي', desc: 'ادرس 5 ساعات هذا الأسبوع', requirement: 5, type: 'weekly' },
+            { id: 6, icon: '💎', title: 'الماسة العميقة', desc: 'حافظ على التركيز لمدة 60 دقيقة', requirement: 60, type: 'singleSession' }
+        ];
+
+        const themes = {
+            cosmic: {
+                primary: '#6366f1',
+                secondary: '#8b5cf6',
+                accent: '#06b6d4',
+                bg: '#0f172a',
+                surface: 'rgba(30, 41, 59, 0.4)',
+                border: 'rgba(255, 255, 255, 0.08)'
+            },
+            sunset: {
+                primary: '#f43f5e',
+                secondary: '#f97316',
+                accent: '#eab308',
+                bg: '#180f15',
+                surface: 'rgba(39, 20, 31, 0.4)',
+                border: 'rgba(255, 255, 255, 0.07)'
+            },
+            emerald: {
+                primary: '#10b981',
+                secondary: '#059669',
+                accent: '#84cc16',
+                bg: '#061712',
+                surface: 'rgba(13, 45, 36, 0.4)',
+                border: 'rgba(255, 255, 255, 0.07)'
+            },
+            ocean: {
+                primary: '#3b82f6',
+                secondary: '#6366f1',
+                accent: '#0ea5e9',
+                bg: '#07111e',
+                surface: 'rgba(15, 34, 58, 0.4)',
+                border: 'rgba(255, 255, 255, 0.08)'
+            }
+        };
+
+        // Create 12 premium circular clock markers/dots dynamically
+        function createClockMarkers() {
+            const svg = document.querySelector('.progress-ring');
+            if (!svg) return;
+            const R = 130; // Radius slightly inside the progress circle (which is R=150)
+            const cx = 160;
+            const cy = 160;
+            for (let i = 0; i < 12; i++) {
+                const angle = (i * 30 - 90) * Math.PI / 180;
+                const x = cx + R * Math.cos(angle);
+                const y = cy + R * Math.sin(angle);
+                
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', x.toFixed(1));
+                circle.setAttribute('cy', y.toFixed(1));
+                circle.setAttribute('r', '3');
+                circle.setAttribute('class', 'marker');
+                
+                // Insert before the hand groups if they exist, or just append
+                const handGroup = document.getElementById('minute-hand');
+                if (handGroup) {
+                    svg.insertBefore(circle, handGroup);
+                } else {
+                    svg.appendChild(circle);
+                }
+            }
+        }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            // Request notification permission for timer alerts
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+            const savedTheme = localStorage.getItem('selectedTheme') || 'cosmic';
+            document.getElementById('theme-select').value = savedTheme;
+            changeTheme(savedTheme);
+
+            createClockMarkers();
+
+            checkStreak();
+            updateStats();
+            renderWeeklyChart();
+            renderAchievements();
+            updateProgressCircle();
+            updateTimerDisplay();
+
+            // Load new tasks system
+            loadTasks();
+
+            // Tasks form submission
+            document.getElementById('add-task-form')?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const input = document.getElementById('task-input');
+                const category = document.getElementById('task-category').value;
+                const priority = document.getElementById('task-priority').value;
+                if (input.value.trim()) {
+                    addTask(input.value, category, priority);
+                    input.value = '';
+                }
+            });
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+                btn.addEventListener('click', () => setTaskFilter(btn.dataset.filter, btn));
+            });
+
+            // CTA band click/focus
+            const ctaBand = document.querySelector('.cta-band');
+            ctaBand?.addEventListener('click', () => {
+                document.getElementById('task-input')?.focus();
+            });
+            ctaBand?.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    document.getElementById('task-input')?.focus();
+                }
+            });
+        });
+
+        function hexToRgb(hex) {
+            const r = parseInt(hex.slice(1, 3), 16);
+            const g = parseInt(hex.slice(3, 5), 16);
+            const b = parseInt(hex.slice(5, 7), 16);
+            return { r, g, b };
+        }
+
+        // Theme Switcher
+        function changeTheme(themeName) {
+            const theme = themes[themeName] || themes.cosmic;
+            const root = document.documentElement;
+            
+            root.style.setProperty('--primary', theme.primary);
+            root.style.setProperty('--secondary', theme.secondary);
+            root.style.setProperty('--accent', theme.accent);
+            root.style.setProperty('--bg', theme.bg);
+            root.style.setProperty('--surface', theme.surface);
+            root.style.setProperty('--border', theme.border);
+            
+            // Update glow colors
+            const rgb = hexToRgb(theme.primary);
+            root.style.setProperty('--primary-glow', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.8)`);
+            root.style.setProperty('--primary-glow-soft', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.5)`);
+            
+            // Update auroras
+            const a1 = document.querySelector('.aurora-1');
+            const a2 = document.querySelector('.aurora-2');
+            const a3 = document.querySelector('.aurora-3');
+            if (a1) a1.style.background = theme.primary;
+            if (a2) a2.style.background = theme.secondary;
+            if (a3) a3.style.background = theme.accent;
+
+            // Update SVGs stop colors
+            const stops = document.querySelectorAll('#timer-gradient stop');
+            if (stops.length >= 3) {
+                stops[0].style.stopColor = theme.primary;
+                stops[1].style.stopColor = theme.secondary;
+                stops[2].style.stopColor = theme.secondary;
+            }
+
+            localStorage.setItem('selectedTheme', themeName);
+        }
+
+        // Navigation
+        function showSection(section, btn) {
+            // Cleanup timers/sounds when leaving timer, focus, or music sections
+            const activeSection = document.querySelector('.timer-section.active, .focus-section.active, .music-section.active');
+            if (activeSection && activeSection.id !== section + '-section') {
+                cleanupAllTimers();
+            }
+
+            document.querySelectorAll('.timer-section, .tasks-section, .focus-section, .music-section, .progress-section').forEach(s => {
+                s.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-tab').forEach(t => {
+                t.classList.remove('active');
+            });
+
+            document.getElementById(section + '-section').classList.add('active');
+            
+            if (btn) {
+                btn.classList.add('active');
+            } else {
+                const tabs = document.querySelectorAll('.nav-tab');
+                tabs.forEach(t => {
+                    if (t.getAttribute('onclick').includes(`'${section}'`)) {
+                        t.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Synced Timer Functions
+        function setMode(mode) {
+            currentMode = mode;
+            timeLeft = modes[mode].time;
+            totalTime = modes[mode].time;
+
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById('mode-' + mode);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            document.getElementById('timer-label').textContent = modes[mode].label;
+
+            // Update custom time input value
+            const customInput = document.getElementById('custom-time-input');
+            if (customInput) {
+                customInput.value = Math.floor(modes[mode].time / 60);
+            }
+
+            updateTimerDisplay();
+            updateProgressCircle();
+
+            if (isRunning) {
+                pauseTimer();
+            }
+        }
+
+        // Custom time setter
+        function setCustomTime(minutes) {
+            const mins = parseInt(minutes);
+            if (isNaN(mins) || mins < 1 || mins > 180) {
+                showNotification('⚠️ الرجاء إدخال وقت صحيح بين 1 و 180 دقيقة');
+                return;
+            }
+            
+            modes[currentMode].time = mins * 60;
+            resetTimer();
+            showNotification(`⏱️ تم تعديل وقت ${modes[currentMode].label} إلى ${mins} دقيقة`);
+        }
+
+        // Synced Timer Control
+        function toggleTimer() {
+            if (isRunning) {
+                pauseTimer();
+            } else {
+                startTimer();
+            }
+        }
+
+        let timerStartTime = null;
+        let tickTimer = null;
+
+        // Cleanup function to stop all running timers/sounds
+        function cleanupAllTimers() {
+            // Stop timer
+            if (tickTimer) {
+                clearInterval(tickTimer);
+                tickTimer = null;
+            }
+            isRunning = false;
+            
+            // Stop breathing guide
+            stopBreathingGuide();
+            
+            // Stop nature sounds
+            Object.keys(natureSounds).forEach(type => {
+                if (natureSounds[type]) {
+                    if (type === 'ocean' || type === 'wind') {
+                        natureSounds[type].source.stop();
+                        natureSounds[type].lfo.stop();
+                    } else {
+                        natureSounds[type].stop();
+                    }
+                }
+            });
+            natureSounds = {};
+            document.querySelectorAll('.sound-btn').forEach(btn => {
+                btn.classList.remove('active');
+                const statusId = btn.id.replace('btn-', 'status-');
+                const statusEl = document.getElementById(statusId);
+                if (statusEl) statusEl.textContent = '▶️';
+            });
+            
+            // Stop binaural
+            if (binauralPlaying) {
+                if (binauralOsc1) { binauralOsc1.stop(); binauralOsc1 = null; }
+                if (binauralOsc2) { binauralOsc2.stop(); binauralOsc2 = null; }
+                if (droneOsc1) { droneOsc1.stop(); droneOsc1 = null; }
+                if (droneOsc2) { droneOsc2.stop(); droneOsc2 = null; }
+                binauralPlaying = false;
+                const binauralBtn = document.getElementById('binaural-toggle');
+                if (binauralBtn) binauralBtn.innerHTML = '▶️ تشغيل البيانورال';
+            }
+            
+            // Stop alarm
+            stopAlarm();
+            
+            // Update button states
+            const startBtn = document.getElementById('start-btn');
+            const focusStartBtn = document.getElementById('focus-start-btn');
+            if (startBtn) startBtn.innerHTML = '▶️ ابدأ';
+            if (focusStartBtn) focusStartBtn.innerHTML = '▶️ ابدأ التركيز';
+        }
+
+        // Expose cleanup for Electron main process
+        window.cleanupAllTimers = cleanupAllTimers;
+
+        function syncTimer() {
+            if (!isRunning) return;
+            const now = Date.now();
+            const elapsedSec = Math.floor((now - timerStartTime) / 1000);
+            timeLeft = Math.max(0, totalTime - elapsedSec);
+            updateTimerDisplay();
+            updateProgressCircle(now);
+
+            if (timeLeft <= 0) {
+                completeTimer();
+            }
+        }
+
+        function startTimer() {
+            if (isRunning) return;
+            isRunning = true;
+            timerStartTime = Date.now() - (totalTime - timeLeft) * 1000;
+            
+            document.getElementById('start-btn').innerHTML = '⏸️ توقف';
+            const focusStartBtn = document.getElementById('focus-start-btn');
+            if (focusStartBtn) focusStartBtn.innerHTML = '⏸️ توقف';
+
+            if (currentMode === 'pomodoro') {
+                startBreathingGuide();
+            }
+
+            syncTimer();
+            tickTimer = setInterval(syncTimer, 50);
+        }
+
+        function pauseTimer() {
+            if (!isRunning) return;
+            isRunning = false;
+            clearInterval(tickTimer);
+            tickTimer = null;
+            
+            document.getElementById('start-btn').innerHTML = '▶️ استأنف';
+            const focusStartBtn = document.getElementById('focus-start-btn');
+            if (focusStartBtn) focusStartBtn.innerHTML = '▶️ استأنف التركيز';
+
+            stopBreathingGuide();
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            timeLeft = modes[currentMode].time;
+            
+            document.getElementById('start-btn').innerHTML = '▶️ ابدأ';
+            const focusStartBtn = document.getElementById('focus-start-btn');
+            if (focusStartBtn) focusStartBtn.innerHTML = '▶️ ابدأ التركيز';
+            
+            updateTimerDisplay();
+            updateProgressCircle();
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            const formatted = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            document.getElementById('timer-display').textContent = formatted;
+            document.getElementById('focus-timer').textContent = formatted;
+        }
+
+        function updateProgressCircle(now) {
+            const circle = document.getElementById('progress-circle');
+            const circumference = 2 * Math.PI * 150; // Radius = 150 -> 942.47
+            const progress = timeLeft / totalTime;
+            const offset = circumference * (1 - progress);
+            circle.style.strokeDashoffset = offset;
+
+            // Update Analog Hands - Show REMAINING TIME as analog clock
+            // 12 o'clock (0°) = 0:00 remaining, clockwise = time remaining
+            const minutesRemaining = Math.floor(timeLeft / 60);
+            const secondsRemaining = timeLeft % 60;
+            
+            const minuteHand = document.getElementById('minute-hand');
+            const secondHand = document.getElementById('second-hand');
+            
+            if (minuteHand) {
+                // Minute hand: 360° per 60 minutes = 6° per minute
+                // Moves smoothly: add seconds/60 * 6° = seconds * 0.1°
+                const minuteAngle = (minutesRemaining + secondsRemaining / 60) * 6;
+                minuteHand.style.transform = `rotate(${minuteAngle}deg)`;
+            }
+            
+            if (secondHand) {
+                // Second hand: discrete tick, 6° per second
+                // At 0 seconds = 0° (12 o'clock), at 30 seconds = 180° (6 o'clock)
+                const secondAngle = secondsRemaining * 6;
+                secondHand.style.transform = `rotate(${secondAngle}deg)`;
+            }
+
+            // Update Active Markers (dots at elapsed progress positions)
+            const markers = document.querySelectorAll('.progress-ring .marker');
+            const elapsedAngle = (1 - progress) * 360;
+            markers.forEach((marker, index) => {
+                const markerAngle = index * 30;
+                if (elapsedAngle >= markerAngle - 0.5) {
+                    marker.classList.add('active');
+                } else {
+                    marker.classList.remove('active');
+                }
+            });
+        }
+
+        // Sound notification when timer completes
+        let alarmCtx = null;
+        let alarmTimeout = null;
+
+        function playCompletionSound() {
+            try {
+                const ctx = getAlarmContext();
+
+                function beep(freq, delay, dur) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+                    gain.gain.setValueAtTime(0.5, ctx.currentTime + delay);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + delay + dur);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + delay);
+                    osc.stop(ctx.currentTime + delay + dur);
+                }
+
+                function playAlarmLoop() {
+                    if (ctx.state === 'closed') return;
+                    beep(880, 0, 0.5);
+                    beep(880, 0.5, 0.5);
+                    beep(1108.73, 1.0, 0.7);
+                    beep(880, 1.7, 0.5);
+                    alarmTimeout = setTimeout(playAlarmLoop, 2400);
+                }
+                playAlarmLoop();
+            } catch (e) {
+                console.log('Audio not supported:', e);
+            }
+        }
+
+        function stopAlarm() {
+            if (alarmTimeout) {
+                clearTimeout(alarmTimeout);
+                alarmTimeout = null;
+            }
+            if (alarmCtx && alarmCtx.state !== 'closed') {
+                alarmCtx.close();
+                alarmCtx = null;
+            }
+            const overlay = document.getElementById('alarm-overlay');
+            if (overlay) overlay.classList.remove('active');
+        }
+
+        function showAlarmOverlay() {
+            let overlay = document.getElementById('alarm-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'alarm-overlay';
+                overlay.innerHTML = '<div class="alarm-box">'
+                    + '<div class="alarm-icon">🔔</div>'
+                    + '<div class="alarm-title">انتهى الوقت!</div>'
+                    + '<div class="alarm-sub">حان وقت الراحة</div>'
+                    + '<button class="alarm-btn" onclick="stopAlarm()">✕  إيقاف</button>'
+                    + '</div>';
+                document.body.appendChild(overlay);
+            }
+            overlay.classList.add('active');
+        }
+
+        function completeTimer() {
+            pauseTimer();
+            
+            playCompletionSound();
+            showAlarmOverlay();
+
+            if (currentMode === 'pomodoro') {
+                const today = new Date().toDateString();
+                const yesterday = new Date(Date.now() - 86400000).toDateString();
+                
+                // Streak Logic
+                if (data.lastStudyDate === yesterday) {
+                    data.streak++;
+                } else if (!data.lastStudyDate || data.lastStudyDate !== today) {
+                    data.streak = 1;
+                }
+
+                data.pomodorosToday++;
+                data.totalPomodoros++;
+                data.focusMinutes += 25;
+                data.lastStudyDate = today;
+
+                // Update weekly hours mapping (Sunday-based offset to index 0:Saturday... 6:Friday)
+                let dayIndex = (new Date().getDay() + 1) % 7;
+                data.weeklyHours[dayIndex] = parseFloat((data.weeklyHours[dayIndex] + 25 / 60).toFixed(2));
+
+                saveData();
+                updateStats();
+                showNotification('🎉 أحسنت! أكملت جلسة التركيز بنجاح!');
+                renderWeeklyChart();
+                renderAchievements();
+            } else {
+                showNotification('☕ انتهت فترة الراحة! جاهز للتركيز مرة أخرى؟');
+            }
+
+            playNotificationSound();
+            resetTimer();
+        }
+
+        // Breathing Guide (Deep Focus Breathing)
+        let breathingInterval = null;
+        
+        function startBreathingGuide() {
+            if (breathingInterval) clearInterval(breathingInterval);
+            
+            const guideText = document.getElementById('breathing-guide-text');
+            const circle = document.getElementById('breathing-circle');
+            if (!circle) return;
+
+            circle.style.animation = 'breathe 10s ease-in-out infinite';
+            circle.style.animationPlayState = 'running';
+
+            function updateGuide() {
+                const sec = Math.floor((totalTime - timeLeft) % 10);
+                if (sec < 4) {
+                    guideText.textContent = '👃 شهيق... (اسحب الهواء ببطء)';
+                    guideText.style.color = 'var(--accent)';
+                } else if (sec < 6) {
+                    guideText.textContent = '🛑 احبس النفس قليلاً...';
+                    guideText.style.color = 'var(--warning)';
+                } else {
+                    guideText.textContent = '😮‍💨 زفير... (أخرج الهواء بهدوء)';
+                    guideText.style.color = 'var(--primary)';
+                }
+            }
+
+            updateGuide();
+            breathingInterval = setInterval(updateGuide, 1000);
+        }
+
+        function stopBreathingGuide() {
+            if (breathingInterval) {
+                clearInterval(breathingInterval);
+                breathingInterval = null;
+            }
+            const guideText = document.getElementById('breathing-guide-text');
+            if (guideText) {
+                guideText.textContent = 'تنفس بعمق... شهيق... زفير...';
+                guideText.style.color = 'var(--text-muted)';
+            }
+            const circle = document.getElementById('breathing-circle');
+            if (circle) {
+                circle.style.animation = 'breathe 4s ease-in-out infinite';
+                circle.style.animationPlayState = 'paused';
+            }
+        }
+
+        // Tasks Functions — New One Motif System
+        const TASKS_STORAGE_KEY = 'focusstudy_tasks_v2';
+        
+        let tasks = [];
+        let currentTaskFilter = 'all';
+        let taskIdCounter = Date.now();
+
+        const CATEGORIES = {
+            study: { label: '📚 مذاكرة', tagClass: 'tag-study', gridId: 'study-grid', countId: 'study-count' },
+            review: { label: '🔄 مراجعة', tagClass: 'tag-review', gridId: 'review-grid', countId: 'review-count' },
+            exam: { label: '📝 امتحان', tagClass: 'tag-exam', gridId: 'exam-grid', countId: 'exam-count' },
+            homework: { label: '✏️ واجب', tagClass: 'tag-homework', gridId: 'homework-grid', countId: 'homework-count' }
+        };
+
+        const PRIORITY_LABELS = {
+            high: { label: '🔴 هام جداً', class: 'tag-priority-high' },
+            medium: { label: '⚡ متوسط', class: 'tag-priority-medium' },
+            low: { label: '🟢 منخفض', class: 'tag-priority-low' }
+        };
+
+        function loadTasks() {
+            try {
+                const stored = localStorage.getItem(TASKS_STORAGE_KEY);
+                if (stored) {
+                    tasks = JSON.parse(stored);
+                    taskIdCounter = Math.max(...tasks.map(t => t.id), Date.now()) + 1;
+                }
+            } catch (e) {
+                console.warn('Failed to load tasks:', e);
+                tasks = [];
+            }
+            renderAllTasks();
+        }
+
+        function saveTasks() {
+            try {
+                localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+            } catch (e) {
+                console.error('Failed to save tasks:', e);
+            }
+        }
+
+        function renderAllTasks() {
+            renderCategoryGroups();
+            renderTaskStats();
+            updateEmptyState();
+        }
+
+        function renderCategoryGroups() {
+            Object.keys(CATEGORIES).forEach(catKey => {
+                const cat = CATEGORIES[catKey];
+                const filtered = getFilteredTasks(catKey);
+                renderTaskGrid(cat.gridId, filtered);
+                updateCategoryCount(cat.countId, filtered.length);
+            });
+        }
+
+        function getFilteredTasks(category = null) {
+            let filtered = tasks;
+            if (category) {
+                filtered = filtered.filter(t => t.category === category);
+            }
+            if (currentTaskFilter === 'active') {
+                filtered = filtered.filter(t => !t.completed);
+            } else if (currentTaskFilter === 'completed') {
+                filtered = filtered.filter(t => t.completed);
+            }
+            return filtered;
+        }
+
+        function renderTaskGrid(gridId, categoryTasks) {
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+
+            if (categoryTasks.length === 0) {
+                grid.innerHTML = '';
+                return;
+            }
+
+            grid.innerHTML = categoryTasks.map((task, index) => `
+                <article class="task-card ${task.completed ? 'completed' : ''}" 
+                         data-id="${task.id}" 
+                         data-category="${task.category}"
+                         role="listitem"
+                         style="animation-delay: ${index * 60}ms;">
+                    <div class="task-main">
+                        <div class="task-checkbox-wrapper">
+                            <div class="motif-container ${task.completed ? 'completed' : ''}" 
+                                 role="checkbox" 
+                                 aria-checked="${task.completed}"
+                                 tabindex="0"
+                                 data-task-id="${task.id}"
+                                 aria-label="${task.completed ? 'إلغاء إنجاز المهمة' : 'وضع المهمة كمكتملة'}">
+                                <span class="motif-check circle">
+                                    <svg viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline class="check-path" points="6 12 10 16 18 8" stroke-dasharray="17" stroke-dashoffset="17"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="task-content">
+                            <h3 class="task-title">${escapeHtml(task.text)}</h3>
+                            <div class="task-meta">
+                                <span class="task-tag ${CATEGORIES[task.category]?.tagClass || ''}">${CATEGORIES[task.category]?.label || task.category}</span>
+                                <span class="task-tag ${PRIORITY_LABELS[task.priority]?.class || 'tag-priority-medium'}">${PRIORITY_LABELS[task.priority]?.label || '⚡ متوسط'}</span>
+                                <time class="task-date" datetime="${task.createdAt}">${formatDate(task.createdAt)}</time>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-actions">
+                        <button class="action-btn edit" data-action="edit" data-task-id="${task.id}" aria-label="تعديل المهمة">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                        <button class="action-btn delete" data-action="delete" data-task-id="${task.id}" aria-label="حذف المهمة">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                        </button>
+                    </div>
+                </article>
+            `).join('');
+
+            grid.querySelectorAll('.motif-container').forEach(container => {
+                container.addEventListener('click', handleTaskCheckboxClick);
+                container.addEventListener('keydown', handleTaskCheckboxKeydown);
+            });
+            grid.querySelectorAll('.action-btn').forEach(btn => {
+                btn.addEventListener('click', handleTaskActionClick);
+            });
+        }
+
+        function updateCategoryCount(countId, count) {
+            const el = document.getElementById(countId);
+            if (el) el.textContent = `${count} ${count === 1 ? 'مهمة' : 'مهام'}`;
+        }
+
+        function renderTaskStats() {
+            const total = tasks.length;
+            const completed = tasks.filter(t => t.completed).length;
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            document.getElementById('total-tasks-count').textContent = total;
+            document.getElementById('completed-tasks-count').textContent = completed;
+            document.getElementById('progress-percent-count').textContent = `${percent}%`;
+            
+            // Also update old stats elements for compatibility
+            document.getElementById('total-tasks').textContent = total;
+            document.getElementById('completed-tasks').textContent = completed;
+            document.getElementById('progress-percent').textContent = `${percent}%`;
+        }
+
+        function updateEmptyState() {
+            const emptyState = document.getElementById('empty-state');
+            const hasVisibleTasks = tasks.some(t => {
+                if (currentTaskFilter === 'active' && t.completed) return false;
+                if (currentTaskFilter === 'completed' && !t.completed) return false;
+                return true;
+            });
+            emptyState.hidden = hasVisibleTasks || tasks.length === 0;
+        }
+
+        function handleTaskCheckboxClick(e) {
+            const container = e.currentTarget;
+            const taskId = parseInt(container.dataset.taskId, 10);
+            toggleTask(taskId);
+        }
+
+        function handleTaskCheckboxKeydown(e) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                const container = e.currentTarget;
+                const taskId = parseInt(container.dataset.taskId, 10);
+                toggleTask(taskId);
+            }
+        }
+
+        function handleTaskActionClick(e) {
+            const btn = e.currentTarget;
+            const action = btn.dataset.action;
+            const taskId = parseInt(btn.dataset.taskId, 10);
+            if (action === 'edit') editTask(taskId);
+            else if (action === 'delete') deleteTask(taskId);
+        }
+
+        function addTask(text, category, priority) {
+            const task = {
+                id: taskIdCounter++,
+                text: text.trim(),
+                category,
+                priority,
+                completed: false,
+                createdAt: new Date().toISOString().split('T')[0]
+            };
+            tasks.unshift(task);
+            saveTasks();
+            renderAllTasks();
+            showNotification('✅ تمت إضافة المهمة بنجاح!');
+        }
+
+        function toggleTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (!task) return;
+            task.completed = !task.completed;
+            saveTasks();
+            renderAllTasks();
+            if (task.completed) {
+                showNotification('🎉 مهمة مكتملة! استمر في الإنجاز!');
+                const card = document.querySelector(`.task-card[data-id="${id}"]`);
+                if (card) {
+                    card.style.animation = 'none';
+                    card.offsetHeight;
+                    card.style.animation = 'pulseSuccess 0.6s var(--spring-bounce)';
+                }
+            }
+        }
+
+        function editTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (!task) return;
+            const card = document.querySelector(`.task-card[data-id="${id}"]`);
+            if (!card) return;
+            const contentDiv = card.querySelector('.task-content');
+            const originalTitle = contentDiv.querySelector('.task-title').textContent;
+            contentDiv.innerHTML = `
+                <input type="text" class="form-input inline-edit-input" value="${escapeHtml(task.text)}" style="margin-bottom: var(--space-sm);" aria-label="تعديل نص المهمة">
+                <div style="display: flex; gap: var(--space-sm);">
+                    <button type="button" class="btn-primary" style="padding: var(--space-xs) var(--space-md); font-size: 0.875rem;" onclick="saveInlineEdit(${id})">حفظ</button>
+                    <button type="button" class="filter-btn" style="padding: var(--space-xs) var(--space-md); font-size: 0.875rem;" onclick="cancelInlineEdit(${id}, ${JSON.stringify(originalTitle).slice(1, -1)})">إلغاء</button>
+                </div>
+            `;
+            const input = contentDiv.querySelector('.inline-edit-input');
+            input.focus();
+            input.select();
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') saveInlineEdit(id);
+                if (e.key === 'Escape') cancelInlineEdit(id, originalTitle);
+            });
+        }
+
+        function saveInlineEdit(id) {
+            const task = tasks.find(t => t.id === id);
+            if (!task) return;
+            const card = document.querySelector(`.task-card[data-id="${id}"]`);
+            const input = card?.querySelector('.inline-edit-input');
+            const newText = input?.value.trim();
+            if (newText) {
+                task.text = newText;
+                saveTasks();
+                renderAllTasks();
+                showNotification('📝 تم تعديل المهمة بنجاح!');
+            } else {
+                renderAllTasks();
+            }
+        }
+
+        function cancelInlineEdit(id, originalText) {
+            const task = tasks.find(t => t.id === id);
+            if (task) task.text = originalText;
+            renderAllTasks();
+        }
+
+        function deleteTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (!task) return;
+            const card = document.querySelector(`.task-card[data-id="${id}"]`);
+            if (card) {
+                card.style.transition = 'all 300ms var(--spring-default)';
+                card.style.opacity = '0';
+                card.style.transform = 'translateX(-20px) scale(0.95)';
+                setTimeout(() => {
+                    tasks = tasks.filter(t => t.id !== id);
+                    saveTasks();
+                    renderAllTasks();
+                    showNotification('🗑️ تم حذف المهمة.');
+                }, 250);
+            }
+        }
+
+        function setTaskFilter(filter, btn) {
+            currentTaskFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            renderAllTasks();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatDate(dateStr) {
+            try {
+                const date = new Date(dateStr);
+                return date.toLocaleDateString('ar-SA', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            } catch {
+                return dateStr;
+            }
+        }
+            const chart = document.getElementById('weekly-chart');
+            const days = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+            const maxValue = Math.max(...data.weeklyHours, 1);
+            const totalWeeklyHours = data.weeklyHours.reduce((a, b) => a + b, 0).toFixed(1);
+
+            document.getElementById('total-weekly-hours-label').textContent = `المجموع: ${totalWeeklyHours} ساعة`;
+
+            chart.innerHTML = days.map((day, i) => {
+                const val = data.weeklyHours[i] || 0;
+                const height = (val / maxValue) * 100;
+                return `
+                    <div class="bar-item">
+                        <div class="bar" style="height: ${height}%; max-height: 200px;">
+                            <span class="bar-value">${val}س</span>
+                        </div>
+                        <span class="bar-label">${day}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getAchievementProgress(ach) {
+            const completedTasks = data.tasks.filter(t => t.completed).length;
+            const weeklyHours = data.weeklyHours.reduce((a, b) => a + b, 0);
+            
+            let current = 0;
+            switch(ach.type) {
+                case 'pomodoros':
+                    current = data.pomodorosToday;
+                    break;
+                case 'totalPomodoros':
+                    current = data.totalPomodoros;
+                    break;
+                case 'tasks':
+                    current = completedTasks;
+                    break;
+                case 'weekly':
+                    current = weeklyHours;
+                    break;
+                case 'singleSession':
+                    current = data.focusMinutes;
+                    break;
+            }
+            
+            if (ach.type === 'weekly') {
+                current = parseFloat(current.toFixed(1));
+            }
+            
+            return {
+                current: current,
+                requirement: ach.requirement,
+                percent: Math.min(100, Math.round((current / ach.requirement) * 100))
+            };
+        }
+
+        function renderAchievements() {
+            const container = document.getElementById('achievements-list');
+            if (!container) return;
+
+            container.innerHTML = achievements.map(ach => {
+                const prog = getAchievementProgress(ach);
+                const unlocked = prog.current >= ach.requirement;
+
+                return `
+                    <div class="achievement-card glass-card ${unlocked ? '' : 'locked'}">
+                        <div class="achievement-icon ${unlocked ? 'unlocked' : 'locked'}">
+                            ${unlocked ? ach.icon : '🔒'}
+                        </div>
+                        <div class="achievement-info">
+                            <h3 style="display: flex; justify-content: space-between; align-items: center; font-size: 1.05rem;">
+                                <span>${ach.title}</span>
+                                <span style="font-size: 0.8rem; color: var(--text-muted); font-family: 'Outfit';">${prog.current}/${ach.requirement}</span>
+                            </h3>
+                            <p>${ach.desc}</p>
+                            <div style="height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; margin-top: 0.6rem; overflow: hidden;">
+                                <div style="height: 100%; width: ${prog.percent}%; background: ${unlocked ? 'var(--warning)' : 'var(--primary)'}; transition: width 0.6s ease;"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Stats & Data
+        function updateStats() {
+            document.getElementById('pomodoros-today').textContent = data.pomodorosToday;
+            document.getElementById('focus-time').textContent = data.focusMinutes;
+            document.getElementById('streak').textContent = data.streak;
+
+            document.getElementById('total-tasks').textContent = data.tasks.length;
+            const completed = data.tasks.filter(t => t.completed).length;
+            document.getElementById('completed-tasks').textContent = completed;
+            document.getElementById('progress-percent').textContent = 
+                data.tasks.length > 0 ? Math.round((completed / data.tasks.length) * 100) + '%' : '0%';
+        }
+
+        function checkStreak() {
+            const today = new Date().toDateString();
+            const yesterday = new Date(Date.now() - 86400000).toDateString();
+
+            if (data.lastStudyDate !== today) {
+                // If it is a new day, reset today's pomodoro count
+                data.pomodorosToday = 0;
+                
+                if (data.lastStudyDate !== yesterday && data.lastStudyDate !== null) {
+                    // Streak broken if it wasn't study yesterday
+                    data.streak = 0;
+                }
+                saveData();
+                updateStats();
+            }
+        }
+
+        // Check streak periodically (in case app stays open past midnight)
+        setInterval(checkStreak, 60000); // Check every minute
+
+        function saveData() {
+            try {
+                localStorage.setItem('pomodorosToday', data.pomodorosToday);
+                localStorage.setItem('totalPomodoros', data.totalPomodoros);
+                localStorage.setItem('focusMinutes', data.focusMinutes);
+                localStorage.setItem('streak', data.streak);
+                localStorage.setItem('lastStudyDate', data.lastStudyDate || '');
+                localStorage.setItem('tasks', JSON.stringify(data.tasks));
+                localStorage.setItem('weeklyHours', JSON.stringify(data.weeklyHours));
+            } catch (e) {
+                console.error('Failed to save data:', e);
+            }
+        }
+
+        function showNotification(message) {
+            const notif = document.getElementById('notification');
+            notif.innerHTML = `🔔 <span>${message}</span>`;
+            notif.classList.add('show');
+
+            setTimeout(() => {
+                notif.classList.remove('show');
+            }, 3500);
+        }
+
+        // Rotate Quotes
+        setInterval(() => {
+            const quote = document.getElementById('focus-quote');
+            if (quote) {
+                quote.style.opacity = '0';
+                setTimeout(() => {
+                    quote.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+                    quote.style.opacity = '1';
+                }, 400);
+            }
+        }, 12000);
+
+        // Web Audio API Sound Generation (Lazy-loaded for compliance)
+        let audioCtx = null;
+        let natureGainNode = null;
+        let natureSounds = {};
+        
+        // Single alarm context (reused)
+        let alarmCtx = null;
+        let alarmTimeout = null;
+        
+        // Binaural Osc Nodes
+        let binauralOsc1 = null;
+        let binauralOsc2 = null;
+        let binauralGain = null;
+        let droneOsc1 = null;
+        let droneOsc2 = null;
+        let binauralPlaying = false;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                natureGainNode = audioCtx.createGain();
+                natureGainNode.connect(audioCtx.destination);
+                
+                const vol = document.getElementById('nature-volume')?.value || 50;
+                natureGainNode.gain.value = vol / 100;
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function getAlarmContext() {
+            if (!alarmCtx || alarmCtx.state === 'closed') {
+                alarmCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return alarmCtx;
+        }
+
+        // Synthesized Timer Alarms
+        function playNotificationSound() {
+            const ctx = initAudio();
+            const soundType = document.getElementById('alarm-sound-select')?.value || 'chime';
+            
+            switch(soundType) {
+                case 'chime': playGentleChime(ctx); break;
+                case 'bowl': playTibetanBowl(ctx); break;
+                case 'digital': playDigitalAlarm(ctx); break;
+                case 'ascending': playAscendingElectronic(ctx); break;
+                default: playGentleChime(ctx);
+            }
+        }
+
+        function playGentleChime(ctx) {
+            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+            notes.forEach((f, i) => {
+                setTimeout(() => {
+                    const osc = ctx.createOscillator();
+                    const oscGain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = f;
+                    
+                    osc.connect(oscGain);
+                    oscGain.connect(ctx.destination);
+                    
+                    oscGain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+                    
+                    osc.start();
+                    osc.stop(ctx.currentTime + 1.2);
+                }, i * 140);
+            });
+        }
+
+        function playTibetanBowl(ctx) {
+            const freqs = [150, 300, 452, 604, 755];
+            const gains = [0.2, 0.08, 0.04, 0.02, 0.01];
+            
+            freqs.forEach((f, i) => {
+                const osc = ctx.createOscillator();
+                const oscGain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = f;
+                
+                osc.connect(oscGain);
+                oscGain.connect(ctx.destination);
+                
+                oscGain.gain.setValueAtTime(gains[i], ctx.currentTime);
+                oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 3.5);
+                
+                osc.start();
+                osc.stop(ctx.currentTime + 3.5);
+            });
+        }
+
+        function playDigitalAlarm(ctx) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = 'square';
+            osc.frequency.value = 880;
+            
+            gain.gain.setValueAtTime(0.12, ctx.currentTime);
+            osc.start();
+            
+            setTimeout(() => { gain.gain.setValueAtTime(0, ctx.currentTime); }, 150);
+            setTimeout(() => { gain.gain.setValueAtTime(0.12, ctx.currentTime); }, 300);
+            setTimeout(() => { gain.gain.setValueAtTime(0, ctx.currentTime); }, 450);
+            setTimeout(() => { osc.stop(); }, 600);
+        }
+
+        function playAscendingElectronic(ctx) {
+            const notes = [440, 554, 659, 880];
+            notes.forEach((f, i) => {
+                setTimeout(() => {
+                    const osc = ctx.createOscillator();
+                    const oscGain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.value = f;
+                    
+                    osc.connect(oscGain);
+                    oscGain.connect(ctx.destination);
+                    
+                    oscGain.gain.setValueAtTime(0.12, ctx.currentTime);
+                    oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+                    
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.5);
+                }, i * 110);
+            });
+        }
+
+        // Noise Buffer Generation Helper
+        function createNoiseBuffer() {
+            initAudio();
+            const bufferSize = audioCtx.sampleRate * 2;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            return buffer;
+        }
+
+        // Premium Nature Sound Synthesizers
+        function createRainSound() {
+            const bufferSize = audioCtx.sampleRate * 2;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                let white = Math.random() * 2 - 1;
+                let crackle = 0;
+                // Add pitter-patter raindrops
+                if (Math.random() < 0.0006) {
+                    crackle = (Math.random() * 2 - 1) * 0.35;
+                }
+                data[i] = white * 0.12 + crackle;
+            }
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            source.loop = true;
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.value = 650;
+
+            source.connect(filter);
+            filter.connect(natureGainNode);
+            return source;
+        }
+
+        function createForestSound() {
+            const buffer = createNoiseBuffer();
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            source.loop = true;
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.value = 1800;
+            filter.Q.value = 0.4;
+
+            source.connect(filter);
+            filter.connect(natureGainNode);
+            return source;
+        }
+
+        function createOceanSound() {
+            const buffer = createNoiseBuffer();
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            source.loop = true;
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.value = 350;
+
+            const waveGain = audioCtx.createGain();
+            waveGain.gain.value = 0.5;
+
+            const lfo = audioCtx.createOscillator();
+            lfo.type = 'sine';
+            lfo.frequency.value = 0.12; // Wave frequency (around 8s cycles)
+
+            const lfoFilterGain = audioCtx.createGain();
+            lfoFilterGain.gain.value = 220;
+            lfo.connect(lfoFilterGain);
+            lfoFilterGain.connect(filter.frequency);
+
+            const lfoAmpGain = audioCtx.createGain();
+            lfoAmpGain.gain.value = 0.35;
+            lfo.connect(lfoAmpGain);
+            lfoAmpGain.connect(waveGain.gain);
+
+            lfo.start();
+
+            source.connect(filter);
+            filter.connect(waveGain);
+            waveGain.connect(natureGainNode);
+
+            return { source, lfo, lfoFilterGain, lfoAmpGain, waveGain };
+        }
+
+        function createFireSound() {
+            const bufferSize = audioCtx.sampleRate * 3;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            let lastVal = 0;
+            for (let i = 0; i < bufferSize; i++) {
+                let white = Math.random() * 2 - 1;
+                // Mathematically smooth for fire glow rumble
+                lastVal = lastVal * 0.95 + white * 0.05;
+                
+                let crackle = 0;
+                // Exp crackling sparks
+                if (Math.random() < 0.0004) {
+                    crackle = Math.random() * 0.55;
+                }
+                data[i] = lastVal * 0.35 + crackle;
+            }
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            source.loop = true;
+            source.connect(natureGainNode);
+            return source;
+        }
+
+        function createWindSound() {
+            const buffer = createNoiseBuffer();
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            source.loop = true;
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.value = 400;
+            filter.Q.value = 2.2;
+
+            const lfo = audioCtx.createOscillator();
+            lfo.type = 'sine';
+            lfo.frequency.value = 0.07;
+            const lfoGain = audioCtx.createGain();
+            lfoGain.gain.value = 160;
+
+            lfo.connect(lfoGain);
+            lfoGain.connect(filter.frequency);
+            lfo.start();
+
+            source.connect(filter);
+            filter.connect(natureGainNode);
+
+            return { source, lfo, lfoGain };
+        }
+
+        function createWhiteNoise() {
+            const buffer = createNoiseBuffer();
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            source.loop = true;
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.value = 10000;
+            source.connect(filter);
+            filter.connect(natureGainNode);
+            return source;
+        }
+
+        function toggleNatureSound(type) {
+            initAudio();
+            const btn = document.getElementById('btn-' + type);
+            const status = document.getElementById('status-' + type);
+
+            if (natureSounds[type]) {
+                // Stop sound
+                if (type === 'ocean' || type === 'wind') {
+                    natureSounds[type].source.stop();
+                    natureSounds[type].lfo.stop();
+                } else {
+                    natureSounds[type].stop();
+                }
+                delete natureSounds[type];
+                btn.classList.remove('active');
+                status.textContent = '▶️';
+            } else {
+                // Play sound
+                switch(type) {
+                    case 'rain': natureSounds[type] = createRainSound(); break;
+                    case 'forest': natureSounds[type] = createForestSound(); break;
+                    case 'ocean': natureSounds[type] = createOceanSound(); break;
+                    case 'fire': natureSounds[type] = createFireSound(); break;
+                    case 'wind': natureSounds[type] = createWindSound(); break;
+                    case 'white': natureSounds[type] = createWhiteNoise(); break;
+                }
+
+                if (type === 'ocean' || type === 'wind') {
+                    natureSounds[type].source.start();
+                } else {
+                    natureSounds[type].start();
+                }
+
+                btn.classList.add('active');
+                status.textContent = '⏸️';
+                showNotification('🔊 تشغيل: ' + getSoundName(type));
+            }
+        }
+
+        function getSoundName(type) {
+            const names = {
+                rain: 'المطر الهادئ',
+                forest: 'حفيف الغابة',
+                ocean: 'موج البحر',
+                fire: 'نار التخييم',
+                wind: 'رياح الجبل',
+                white: 'الضوضاء البيضاء'
+            };
+            return names[type] || type;
+        }
+
+        function setNatureVolume(value) {
+            if (natureGainNode) {
+                natureGainNode.gain.value = value / 100;
+            }
+            document.getElementById('volume-display').textContent = value + '%';
+        }
+
+        // Binaural Beats with Meditative drone backing pad
+        function toggleBinaural() {
+            initAudio();
+            
+            if (binauralPlaying) {
+                if (binauralOsc1) { binauralOsc1.stop(); binauralOsc1 = null; }
+                if (binauralOsc2) { binauralOsc2.stop(); binauralOsc2 = null; }
+                if (droneOsc1) { droneOsc1.stop(); droneOsc1 = null; }
+                if (droneOsc2) { droneOsc2.stop(); droneOsc2 = null; }
+                binauralPlaying = false;
+                document.getElementById('binaural-toggle').innerHTML = '▶️ تشغيل البيانورال';
+                showNotification('⏹️ توقف البيانورال');
+            } else {
+                const freq = parseInt(document.getElementById('binaural-freq').value);
+                const baseFreq = 160;
+
+                binauralOsc1 = audioCtx.createOscillator();
+                binauralOsc1.type = 'sine';
+                binauralOsc1.frequency.value = baseFreq;
+
+                binauralOsc2 = audioCtx.createOscillator();
+                binauralOsc2.type = 'sine';
+                binauralOsc2.frequency.value = baseFreq + freq;
+
+                binauralGain = audioCtx.createGain();
+                binauralGain.gain.value = 0.2;
+
+                // Create warm harmonic ambient pad
+                droneOsc1 = audioCtx.createOscillator();
+                droneOsc1.type = 'triangle';
+                droneOsc1.frequency.value = baseFreq / 2; // Octave below base
+
+                droneOsc2 = audioCtx.createOscillator();
+                droneOsc2.type = 'sine';
+                droneOsc2.frequency.value = baseFreq * 1.5; // Perfect fifth
+
+                const droneGain = audioCtx.createGain();
+                droneGain.gain.value = 0.08;
+
+                const droneFilter = audioCtx.createBiquadFilter();
+                droneFilter.type = 'lowpass';
+                droneFilter.frequency.value = 130;
+
+                const panner1 = audioCtx.createStereoPanner();
+                panner1.pan.value = -1;
+                const panner2 = audioCtx.createStereoPanner();
+                panner2.pan.value = 1;
+
+                binauralOsc1.connect(panner1);
+                binauralOsc2.connect(panner2);
+                panner1.connect(binauralGain);
+                panner2.connect(binauralGain);
+                binauralGain.connect(audioCtx.destination);
+
+                droneOsc1.connect(droneFilter);
+                droneOsc2.connect(droneFilter);
+                droneFilter.connect(droneGain);
+                droneGain.connect(audioCtx.destination);
+
+                binauralOsc1.start();
+                binauralOsc2.start();
+                droneOsc1.start();
+                droneOsc2.start();
+                
+                binauralPlaying = true;
+                document.getElementById('binaural-toggle').innerHTML = '⏸️ إيقاف البيانورال';
+                showNotification('🧠 تشغيل نبضات بيانورال: ' + freq + 'Hz');
+            }
+        }
+
+        function updateBinauralFreq(value) {
+            document.getElementById('freq-value').textContent = value;
+            if (binauralPlaying && binauralOsc2) {
+                binauralOsc2.frequency.value = 160 + parseInt(value);
+            }
+        }
+
+        function setBinauralPreset(freq) {
+            document.getElementById('binaural-freq').value = freq;
+            updateBinauralFreq(freq);
+            if (binauralPlaying) {
+                toggleBinaural();
+                setTimeout(() => toggleBinaural(), 100);
+            }
+        }
+
+        // YouTube Video Manager
+        // Reset All Study App Data
+        function resetAllData() {
+            if (confirm('هل أنت متأكد من رغبتك في إعادة تعيين كافة البيانات والتقدم الدراسي؟ لا يمكن التراجع عن هذا الإجراء.')) {
+                localStorage.clear();
+                data = {
+                    pomodorosToday: 0,
+                    totalPomodoros: 0,
+                    focusMinutes: 0,
+                    streak: 0,
+                    lastStudyDate: null,
+                    tasks: [],
+                    weeklyHours: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+                };
+                saveData();
+                // Also clear new tasks storage
+                localStorage.removeItem('focusstudy_tasks_v2');
+                tasks = [];
+                taskIdCounter = Date.now();
+                updateStats();
+                renderAllTasks();
+                renderWeeklyChart();
+                renderAchievements();
+                resetTimer();
+                showNotification('🧹 تم مسح وإعادة تعيين كافة البيانات بنجاح.');
+            }
+        }
+
+        // Add pulse success animation for task completion
+        const pulseStyle = document.createElement('style');
+        pulseStyle.textContent = `
+            @keyframes pulseSuccess {
+                0% { box-shadow: 0 0 0 0 var(--success); }
+                50% { box-shadow: 0 0 0 16px transparent; }
+                100% { box-shadow: 0 0 0 0 transparent; }
+            }
+        `;
+        document.head.appendChild(pulseStyle);
+    
+    // Load Capacitor Bridge for native mobile features
+    const capScript = document.createElement('script');
+    capScript.src = 'capacitor-bridge.js';
+    capScript.onload = () => {
+      if (window.CapacitorBridge?.isCapacitor) {
+        console.log('Running in Capacitor environment - native features enabled');
+      }
+    };
+    document.body.appendChild(capScript);
+    </script>
+</body>
+</html>

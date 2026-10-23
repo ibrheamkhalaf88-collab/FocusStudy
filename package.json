@@ -1,0 +1,70 @@
+{
+  "name": "focus-study-app",
+  "version": "2.0.0",
+  "description": "فوكس - برنامج الدراسة والتركيز والتنفس العميق والموسيقى الهادئة",
+  "main": "main.js",
+  "scripts": {
+    "start": "npx electron .",
+    "build": "electron-builder --win",
+    "build:dir": "electron-builder --win --dir",
+    "preflight": "node preflight.mjs",
+    "release": "node scripts/release.mjs",
+    "cap:sync": "npx cap sync android",
+    "cap:build:android": "cd android && ./gradlew assembleRelease",
+    "cap:build:android:debug": "cd android && ./gradlew assembleDebug",
+    "lint": "node --check www/index.html && echo 'Syntax OK'",
+    "test": "node preflight.mjs"
+  },
+  "keywords": [
+    "focus",
+    "pomodoro",
+    "study",
+    "binaural"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.antigravity.focus",
+    "productName": "FocusStudy",
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "FocusStudy.exe"
+    },
+    "files": [
+      "index.html",
+      "main.js",
+      "preload.js",
+      "capacitor-bridge.js",
+      "assets/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    }
+  },
+  "allowScripts": {
+    "electron@31.7.7": true
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/cli": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/haptics": "^8.0.2",
+    "@capacitor/local-notifications": "^8.3.1",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4"
+  }
+}

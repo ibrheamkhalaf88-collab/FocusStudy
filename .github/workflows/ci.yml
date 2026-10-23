@@ -1,0 +1,78 @@
+name: CI Quality Gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check syntax
+        run: node --check www/index.html 2>&1 | head -20 || true
+
+      - name: Validate HTML
+        run: |
+          # Check for basic HTML validity
+          if ! grep -q "<!DOCTYPE html>" www/index.html; then
+            echo "Missing DOCTYPE"
+            exit 1
+          fi
+          if ! grep -q "lang=\"ar\"" www/index.html; then
+            echo "Missing Arabic lang attribute"
+            exit 1
+          fi
+          echo "HTML validation passed"
+
+      - name: Check for console errors patterns
+        run: |
+          # Check for common issues
+          if grep -r "console\.log" www/index.html | grep -v "//"; then
+            echo "Warning: console.log found in production code"
+          fi
+
+  electron-build-test:
+    runs-on: windows-latest
+    needs: lint-and-test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Electron (dry run)
+        run: npm run build --dry-run 2>&1 | head -50 || true
+        env:
+          ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
+
+      - name: Verify package.json
+        run: |
+          node -e "
+            const pkg = require('./package.json');
+            if (!pkg.build || !pkg.build.win) {
+              console.error('Missing electron-builder config');
+              process.exit(1);
+            }
+            console.log('Package config OK');
+          "

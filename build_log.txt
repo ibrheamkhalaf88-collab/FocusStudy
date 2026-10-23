@@ -1,0 +1,40 @@
+
+> focus-study-app@2.0.0 build
+> electron-builder --win
+
+  • electron-builder  version=24.13.3 os=10.0.26200
+  • loaded configuration  file=package.json ("build" field)
+  • packaging       platform=win32 arch=x64 electron=31.7.7 appOutDir=dist\win-unpacked
+  • downloading     url=https://github.com/electron/electron/releases/download/v31.7.7/electron-v31.7.7-win32-x64.zip size=111 MB parts=8
+  • retrying        attempt=1
+  • retrying        attempt=1
+  • retrying        attempt=2
+  • retrying        attempt=1
+  • retrying        attempt=1
+  • retrying        attempt=2
+  • retrying        attempt=2
+  • retrying        attempt=3
+  • retrying        attempt=2
+  • retrying        attempt=3
+  ⨯ Get "https://release-assets.githubusercontent.com/github-production-release-asset/9384267/3775fbdd-9884-4eaa-85f5-5a6f6c515ab7?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-05-24T11%3A50%3A22Z&rscd=attachment%3B+filename%3Delectron-v31.7.7-win32-x64.zip&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-05-24T10%3A50%3A02Z&ske=2026-05-24T11%3A50%3A22Z&sks=b&skv=2018-11-09&sig=N8eqJticwi%2FycsavwUIssNgilzZFJXDKpJvApFiW9Uo%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc3OTYyNDE1MiwibmJmIjoxNzc5NjIwNTUyLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.AOQnF_ymXg7UN29v_VwcFzVRiBUXMb8-cDgSzjHryRg&response-content-disposition=attachment%3B%20filename%3Delectron-v31.7.7-win32-x64.zip&response-content-type=application%2Foctet-stream": EOF
+github.com/develar/app-builder/pkg/download.(*Part).doRequest
+	/Volumes/data/Documents/app-builder/pkg/download/Part.go:108
+github.com/develar/app-builder/pkg/download.(*Part).download
+	/Volumes/data/Documents/app-builder/pkg/download/Part.go:67
+github.com/develar/app-builder/pkg/download.(*Downloader).DownloadResolved.func1.1
+	/Volumes/data/Documents/app-builder/pkg/download/downloader.go:155
+github.com/develar/app-builder/pkg/util.MapAsyncConcurrency.func2
+	/Volumes/data/Documents/app-builder/pkg/util/async.go:68
+runtime.goexit
+	/usr/local/Cellar/go/1.17/libexec/src/runtime/asm_amd64.s:1581  
+  ⨯ C:\Users\acc\Desktop\مشاريع الدراسه\مشروعstudy اخر نسخه فيرجن 2.0\node_modules\app-builder-bin\win\x64\app-builder.exe process failed ERR_ELECTRON_BUILDER_CANNOT_EXECUTE
+Exit code:
+1  failedTask=build stackTrace=Error: C:\Users\acc\Desktop\مشاريع الدراسه\مشروعstudy اخر نسخه فيرجن 2.0\node_modules\app-builder-bin\win\x64\app-builder.exe process failed ERR_ELECTRON_BUILDER_CANNOT_EXECUTE
+Exit code:
+1
+    at ChildProcess.<anonymous> (C:\Users\acc\Desktop\مشاريع الدراسه\مشروعstudy اخر نسخه فيرجن 2.0\node_modules\builder-util\src\util.ts:252:14)
+    at Object.onceWrapper (node:events:623:26)
+    at ChildProcess.emit (node:events:508:28)
+    at ChildProcess.cp.emit (C:\Users\acc\Desktop\مشاريع الدراسه\مشروعstudy اخر نسخه فيرجن 2.0\node_modules\cross-spawn\lib\enoent.js:34:29)
+    at maybeClose (node:internal/child_process:1100:16)
+    at Process.ChildProcess._handle.onexit (node:internal/child_process:305:5)

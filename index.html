@@ -2150,7 +2150,7 @@
             outline-offset: 2px;
         }
     </style>
-    <base target="_blank">
+    
 </head>
 <body>
     <div class="bg-animation"></div>
@@ -4130,15 +4130,12 @@
         `;
         document.head.appendChild(pulseStyle);
     
-    // Load Capacitor Bridge for native mobile features
-    const capScript = document.createElement('script');
-    capScript.src = 'capacitor-bridge.js';
-    capScript.onload = () => {
-      if (window.CapacitorBridge?.isCapacitor) {
-        console.log('Running in Capacitor environment - native features enabled');
-      }
-    };
-    document.body.appendChild(capScript);
+    // Load Capacitor Bridge ONLY in Capacitor environment (not on web)
+    if (window.Capacitor?.isNativePlatform) {
+      const capScript = document.createElement('script');
+      capScript.src = 'capacitor-bridge.js';
+      document.body.appendChild(capScript);
+    }
     </script>
 </body>
 </html>

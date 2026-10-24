@@ -2613,6 +2613,7 @@
 
     <script>
 
+
         // Data Management (Fixed double storage & streak bugs)
         let data = {
             pomodorosToday: parseInt(localStorage.getItem('pomodorosToday') || '0'),
@@ -2816,19 +2817,54 @@
 
         // Navigation
         function showSection(section, btn) {
-            // Cleanup timers/sounds when leaving timer, focus, or music sections
+            // Cleanup ONLY sounds when leaving timer, focus, or music sections
+            // Do NOT stop the main timer (tickTimer) when switching tabs
             const activeSection = document.querySelector('.timer-section.active, .focus-section.active, .music-section.active');
             if (activeSection && activeSection.id !== section + '-section') {
-                cleanupAllTimers();
+                // Only cleanup sounds, NOT the main timer
+                stopBreathingGuide();
+                
+                // Stop nature sounds
+                Object.keys(natureSounds).forEach(type => {
+                    if (natureSounds[type]) {
+                        if (type === 'ocean' || type === 'wind') {
+                            natureSounds[type].source.stop();
+                            natureSounds[type].lfo.stop();
+                        } else {
+                            natureSounds[type].stop();
+                        }
+                    }
+                });
+                natureSounds = {};
+                document.querySelectorAll('.sound-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    const statusId = btn.id.replace('btn-', 'status-');
+                    const statusEl = document.getElementById(statusId);
+                    if (statusEl) statusEl.textContent = '▶️';
+                });
+                
+                // Stop binaural
+                if (binauralPlaying) {
+                    if (binauralOsc1) { binauralOsc1.stop(); binauralOsc1 = null; }
+                    if (binauralOsc2) { binauralOsc2.stop(); binauralOsc2 = null; }
+                    if (droneOsc1) { droneOsc1.stop(); droneOsc1 = null; }
+                    if (droneOsc2) { droneOsc2.stop(); droneOsc2 = null; }
+                    binauralPlaying = false;
+                    const binauralBtn = document.getElementById('binaural-toggle');
+                    if (binauralBtn) binauralBtn.innerHTML = '▶️ تشغيل البيانورال';
+                }
+                
+                // Stop alarm
+                stopAlarm();
             }
-
+            
             document.querySelectorAll('.timer-section, .tasks-section, .focus-section, .music-section, .progress-section').forEach(s => {
                 s.classList.remove('active');
             });
             document.querySelectorAll('.nav-tab').forEach(t => {
                 t.classList.remove('active');
             });
-
+            
             document.getElementById(section + '-section').classList.add('active');
             
             if (btn) {
@@ -4194,6 +4230,7 @@
     }
     
     }
+
 </script>
 </body>
 </html>

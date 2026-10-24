@@ -2619,6 +2619,8 @@
 
 
 
+
+
         // Data Management (Fixed double storage & streak bugs)
         let data = {
             pomodorosToday: parseInt(localStorage.getItem('pomodorosToday') || '0'),
@@ -3634,23 +3636,27 @@
 
         // Stats & Data
         function updateStats() {
-            const pomodorosEl = document.getElementById('pomodoros-today');
-            const focusEl = document.getElementById('focus-time');
-            const streakEl = document.getElementById('streak');
-            if (pomodorosEl) pomodorosEl.textContent = data.pomodorosToday;
-            if (focusEl) focusEl.textContent = data.focusMinutes;
-            if (streakEl) streakEl.textContent = data.streak;
+            try {
+                const pomodorosEl = document.getElementById('pomodoros-today');
+                const focusEl = document.getElementById('focus-time');
+                const streakEl = document.getElementById('streak');
+                if (pomodorosEl) pomodorosEl.textContent = data.pomodorosToday;
+                if (focusEl) focusEl.textContent = data.focusMinutes;
+                if (streakEl) streakEl.textContent = data.streak;
 
-            // Update new task stats if elements exist
-            const totalTasksEl = document.getElementById('total-tasks-count');
-            const completedTasksEl = document.getElementById('completed-tasks-count');
-            const progressPercentEl = document.getElementById('progress-percent-count');
-            const total = tasks.length;
-            const completed = tasks.filter(t => t.completed).length;
-            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
-            if (totalTasksEl) totalTasksEl.textContent = total;
-            if (completedTasksEl) completedTasksEl.textContent = completed;
-            if (progressPercentEl) progressPercentEl.textContent = percent + '%';
+                // Update new task stats if elements exist
+                const totalTasksEl = document.getElementById('total-tasks-count');
+                const completedTasksEl = document.getElementById('completed-tasks-count');
+                const progressPercentEl = document.getElementById('progress-percent-count');
+                const total = tasks.length;
+                const completed = tasks.filter(t => t.completed).length;
+                const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+                if (totalTasksEl) totalTasksEl.textContent = total;
+                if (completedTasksEl) completedTasksEl.textContent = completed;
+                if (progressPercentEl) progressPercentEl.textContent = percent + '%';
+            } catch (e) {
+                console.warn('updateStats error:', e.message);
+            }
         }
 
         function checkStreak() {
@@ -3742,6 +3748,10 @@
         function getAlarmContext() {
             if (!alarmCtx || alarmCtx.state === 'closed') {
                 alarmCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            // Resume if suspended (required for autoplay policy)
+            if (alarmCtx.state === 'suspended') {
+                alarmCtx.resume().catch(e => console.warn('AudioContext resume failed:', e));
             }
             return alarmCtx;
         }
@@ -4246,6 +4256,8 @@
       document.body.appendChild(capScript);
     }
     
+
+
 
 
 

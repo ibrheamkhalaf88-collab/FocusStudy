@@ -2617,6 +2617,7 @@
 
 
 
+
         // Data Management (Fixed double storage & streak bugs)
         let data = {
             pomodorosToday: parseInt(localStorage.getItem('pomodorosToday') || '0'),
@@ -2735,7 +2736,7 @@
 
             createClockMarkers();
 
-            checkStreak();
+            // checkStreak(); // Moved to after function definitions
             updateStats();
             renderWeeklyChart();
             renderAchievements();
@@ -4172,6 +4173,11 @@
     if (window.Capacitor?.isNativePlatform) {
       const capScript = document.createElement('script');
     // Expose functions globally for onclick handlers
+
+    // Initialize streak check after all functions are defined
+    checkStreak();
+    updateStats();
+
     window.showSection = showSection;
     window.setMode = setMode;
     window.setCustomTime = setCustomTime;
@@ -4231,6 +4237,7 @@
       document.body.appendChild(capScript);
     }
     
+
 
 
 

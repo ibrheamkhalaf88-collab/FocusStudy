@@ -4133,6 +4133,62 @@
     // Load Capacitor Bridge ONLY in Capacitor environment (not on web)
     if (window.Capacitor?.isNativePlatform) {
       const capScript = document.createElement('script');
+    // Expose functions globally for onclick handlers
+    window.showSection = showSection;
+    window.setMode = setMode;
+    window.setCustomTime = setCustomTime;
+    window.toggleTimer = toggleTimer;
+    window.resetTimer = resetTimer;
+    window.updateTimerDisplay = updateTimerDisplay;
+    window.updateProgressCircle = updateProgressCircle;
+    window.playCompletionSound = playCompletionSound;
+    window.stopAlarm = stopAlarm;
+    window.showAlarmOverlay = showAlarmOverlay;
+    window.completeTimer = completeTimer;
+    window.startBreathingGuide = startBreathingGuide;
+    window.stopBreathingGuide = stopBreathingGuide;
+    window.addTask = addTask;
+    window.toggleTask = toggleTask;
+    window.editTask = editTask;
+    window.saveInlineEdit = saveInlineEdit;
+    window.cancelInlineEdit = cancelInlineEdit;
+    window.deleteTask = deleteTask;
+    window.setTaskFilter = setTaskFilter;
+    window.loadTasks = loadTasks;
+    window.saveTasks = saveTasks;
+    window.renderAllTasks = renderAllTasks;
+    window.renderCategoryGroups = renderCategoryGroups;
+    window.renderTaskGrid = renderTaskGrid;
+    window.renderTaskStats = renderTaskStats;
+    window.renderWeeklyChart = renderWeeklyChart;
+    window.renderAchievements = renderAchievements;
+    window.updateStats = updateStats;
+    window.checkStreak = checkStreak;
+    window.saveData = saveData;
+    window.showNotification = showNotification;
+    window.playNotificationSound = playNotificationSound;
+    window.initAudio = initAudio;
+    window.getAlarmContext = getAlarmContext;
+    window.playGentleChime = playGentleChime;
+    window.playTibetanBowl = playTibetanBowl;
+    window.playDigitalAlarm = playDigitalAlarm;
+    window.playAscendingElectronic = playAscendingElectronic;
+    window.createNoiseBuffer = createNoiseBuffer;
+    window.createRainSound = createRainSound;
+    window.createForestSound = createForestSound;
+    window.createOceanSound = createOceanSound;
+    window.createFireSound = createFireSound;
+    window.createWindSound = createWindSound;
+    window.createWhiteNoise = createWhiteNoise;
+    window.toggleNatureSound = toggleNatureSound;
+    window.getSoundName = getSoundName;
+    window.setNatureVolume = setNatureVolume;
+    window.toggleBinaural = toggleBinaural;
+    window.updateBinauralFreq = updateBinauralFreq;
+    window.setBinauralPreset = setBinauralPreset;
+    window.resetAllData = resetAllData;
+    window.cleanupAllTimers = cleanupAllTimers;
+
       capScript.src = 'capacitor-bridge.js';
       document.body.appendChild(capScript);
     }

@@ -2621,6 +2621,7 @@
 
 
 
+
         // Data Management (Fixed double storage & streak bugs)
         let data = {
             pomodorosToday: parseInt(localStorage.getItem('pomodorosToday') || '0'),
@@ -3388,14 +3389,12 @@
             const completed = tasks.filter(t => t.completed).length;
             const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-            document.getElementById('total-tasks-count').textContent = total;
-            document.getElementById('completed-tasks-count').textContent = completed;
-            document.getElementById('progress-percent-count').textContent = `${percent}%`;
-            
-            // Also update old stats elements for compatibility
-            document.getElementById('total-tasks').textContent = total;
-            document.getElementById('completed-tasks').textContent = completed;
-            document.getElementById('progress-percent').textContent = `${percent}%`;
+            const totalTasksEl = document.getElementById('total-tasks-count');
+            const completedTasksEl = document.getElementById('completed-tasks-count');
+            const progressPercentEl = document.getElementById('progress-percent-count');
+            if (totalTasksEl) totalTasksEl.textContent = total;
+            if (completedTasksEl) completedTasksEl.textContent = completed;
+            if (progressPercentEl) progressPercentEl.textContent = percent + '%';
         }
 
         function updateEmptyState() {
@@ -4256,6 +4255,7 @@
       document.body.appendChild(capScript);
     }
     
+
 
 
 

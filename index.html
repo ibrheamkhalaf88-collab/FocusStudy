@@ -2612,6 +2612,7 @@
     <div class="notification" id="notification"></div>
 
     <script>
+
         // Data Management (Fixed double storage & streak bugs)
         let data = {
             pomodorosToday: parseInt(localStorage.getItem('pomodorosToday') || '0'),
@@ -3209,7 +3210,6 @@
         const TASKS_STORAGE_KEY = 'focusstudy_tasks_v2';
         
         let tasks = [];
-        let currentTaskFilter = 'all';
         let taskIdCounter = Date.now();
 
         const CATEGORIES = {
@@ -3507,6 +3507,7 @@
                 return dateStr;
             }
         }
+        function renderWeeklyChart() {
             const chart = document.getElementById('weekly-chart');
             const days = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
             const maxValue = Math.max(...data.weeklyHours, 1);
@@ -3526,7 +3527,6 @@
                     </div>
                 `;
             }).join('');
-        }
 
         function getAchievementProgress(ach) {
             const completedTasks = data.tasks.filter(t => t.completed).length;
@@ -4136,6 +4136,8 @@
       capScript.src = 'capacitor-bridge.js';
       document.body.appendChild(capScript);
     }
-    </script>
+    
+    }
+</script>
 </body>
 </html>

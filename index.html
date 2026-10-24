@@ -2614,6 +2614,9 @@
     <script>
 
 
+
+
+
         // Data Management (Fixed double storage & streak bugs)
         let data = {
             pomodorosToday: parseInt(localStorage.getItem('pomodorosToday') || '0'),
@@ -3563,6 +3566,7 @@
                     </div>
                 `;
             }).join('');
+        }
 
         function getAchievementProgress(ach) {
             const completedTasks = data.tasks.filter(t => t.completed).length;
@@ -3701,8 +3705,6 @@
         let natureSounds = {};
         
         // Single alarm context (reused)
-        let alarmCtx = null;
-        let alarmTimeout = null;
         
         // Binaural Osc Nodes
         let binauralOsc1 = null;
@@ -4229,7 +4231,9 @@
       document.body.appendChild(capScript);
     }
     
-    }
+
+
+
 
 </script>
 </body>

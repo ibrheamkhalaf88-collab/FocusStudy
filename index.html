@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; media-src 'self' blob:; upgrade-insecure-requests;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.fontshare.com; font-src 'self' https://fonts.gstatic.com https://cdn.fontshare.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; media-src 'self' blob:; upgrade-insecure-requests;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Frame-Options" content="DENY">
@@ -2618,6 +2618,7 @@
 
 
 
+
         // Data Management (Fixed double storage & streak bugs)
         let data = {
             pomodorosToday: parseInt(localStorage.getItem('pomodorosToday') || '0'),
@@ -3633,15 +3634,23 @@
 
         // Stats & Data
         function updateStats() {
-            document.getElementById('pomodoros-today').textContent = data.pomodorosToday;
-            document.getElementById('focus-time').textContent = data.focusMinutes;
-            document.getElementById('streak').textContent = data.streak;
+            const pomodorosEl = document.getElementById('pomodoros-today');
+            const focusEl = document.getElementById('focus-time');
+            const streakEl = document.getElementById('streak');
+            if (pomodorosEl) pomodorosEl.textContent = data.pomodorosToday;
+            if (focusEl) focusEl.textContent = data.focusMinutes;
+            if (streakEl) streakEl.textContent = data.streak;
 
-            document.getElementById('total-tasks').textContent = data.tasks.length;
-            const completed = data.tasks.filter(t => t.completed).length;
-            document.getElementById('completed-tasks').textContent = completed;
-            document.getElementById('progress-percent').textContent = 
-                data.tasks.length > 0 ? Math.round((completed / data.tasks.length) * 100) + '%' : '0%';
+            // Update new task stats if elements exist
+            const totalTasksEl = document.getElementById('total-tasks-count');
+            const completedTasksEl = document.getElementById('completed-tasks-count');
+            const progressPercentEl = document.getElementById('progress-percent-count');
+            const total = tasks.length;
+            const completed = tasks.filter(t => t.completed).length;
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+            if (totalTasksEl) totalTasksEl.textContent = total;
+            if (completedTasksEl) completedTasksEl.textContent = completed;
+            if (progressPercentEl) progressPercentEl.textContent = percent + '%';
         }
 
         function checkStreak() {
@@ -4237,6 +4246,7 @@
       document.body.appendChild(capScript);
     }
     
+
 
 
 
